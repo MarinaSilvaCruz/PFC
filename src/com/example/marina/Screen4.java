@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 public class Screen4 extends Activity {
@@ -21,7 +22,7 @@ public class Screen4 extends Activity {
 		setContentView(R.layout.activity_main2);
 		
 		final Button button = new Button(this);
-		final EditText text = (EditText)findViewById(R.id.textView1);
+		final TextView text = (TextView)findViewById(R.id.textView1);
 		
 		OnClickListener buttonListener = new View.OnClickListener() {
 
