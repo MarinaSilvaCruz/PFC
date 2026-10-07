@@ -176,6 +176,20 @@ Como o tráfego se concentra nos dias de show, **evitar o cold start** no moment
 6. **Lista real de locais:** nome, endereço, descrição, coordenadas exatas, raio e foto do QR de cada um.
 7. **Hospedagem e domínio.**
 
+### Decisões tomadas (07/10/2026)
+
+| # | Tema | Decisão |
+|---|---|---|
+| 1 | Nome no cadastro | **Sim, opcional.** |
+| 2 | Login | **Código de 6 dígitos por e-mail** (verificar o e-mail também no cadastro). |
+| 3 | Ordem dos locais | **Livre**: qualquer ordem. A trilha é só visual. |
+| 4 | Aba Informações | Regras/como funciona, aviso de não-oficialidade, FAQ + contato, privacidade (LGPD) + botão **Sair**. |
+| 5 | Ao completar | **Tela de conclusão compartilhável** (cartela completa, pronta para print/stories). |
+| 6 | Lista real de locais | Ainda pendente: seguir com placeholders. |
+| 7 | Hospedagem | **Decidir depois.** Código portátil (Node + Postgres, configurado por `.env`). |
+
+O código do site fica na pasta `rally-stamp-sp/` deste repositório (o projeto Android antigo na raiz não é tocado).
+
 ---
 
 ## 9. Próximos passos sugeridos (Claude Code)
