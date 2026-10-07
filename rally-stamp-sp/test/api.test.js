@@ -22,7 +22,7 @@ test.before(async () => {
   pool = criarPool(URL_TESTE);
   await pool.query('DROP TABLE IF EXISTS carimbos, codigos, sessoes, participantes, locais CASCADE');
   await migrar(pool);
-  await semearLocais(pool);
+  await semearLocais(pool, require('node:path').join(__dirname, 'locais.fixture.json'));
   servidor = criarApp(pool).listen(0);
   base = `http://127.0.0.1:${servidor.address().port}`;
 });

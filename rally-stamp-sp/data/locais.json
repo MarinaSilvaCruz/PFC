@@ -1,10 +1,54 @@
 [
-  { "slug": "liberdade", "ordem": 1, "nome": "[PLACEHOLDER] Liberdade", "bairro": "Liberdade", "endereco": "Praça da Liberdade, s/n - Liberdade, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.5555, "lng": -46.6355, "raio_m": 150 },
-  { "slug": "bom-retiro", "ordem": 2, "nome": "[PLACEHOLDER] Bom Retiro", "bairro": "Bom Retiro", "endereco": "Rua Prof. Lombroso, s/n - Bom Retiro, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.5265, "lng": -46.6398, "raio_m": 150 },
-  { "slug": "pinacoteca", "ordem": 3, "nome": "[PLACEHOLDER] Pinacoteca", "bairro": "Luz", "endereco": "Praça da Luz, 2 - Luz, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.5343, "lng": -46.6339, "raio_m": 150 },
-  { "slug": "paulista", "ordem": 4, "nome": "[PLACEHOLDER] Av. Paulista", "bairro": "Bela Vista", "endereco": "Av. Paulista, 1578 - Bela Vista, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.5614, "lng": -46.6559, "raio_m": 150 },
-  { "slug": "beco-do-batman", "ordem": 5, "nome": "[PLACEHOLDER] Beco do Batman", "bairro": "Vila Madalena", "endereco": "Rua Gonçalo Afonso, s/n - Vila Madalena, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.5563, "lng": -46.6869, "raio_m": 150 },
-  { "slug": "ibirapuera", "ordem": 6, "nome": "[PLACEHOLDER] Ibirapuera", "bairro": "Vila Mariana", "endereco": "Av. Pedro Álvares Cabral, s/n - Vila Mariana, São Paulo - SP", "descricao": "[PLACEHOLDER] Parque grande: raio maior.", "foto_qr_url": "", "lat": -23.5874, "lng": -46.6576, "raio_m": 400 },
-  { "slug": "pacaembu", "ordem": 7, "nome": "[PLACEHOLDER] Pacaembu", "bairro": "Pacaembu", "endereco": "Praça Charles Miller, s/n - Pacaembu, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.5475, "lng": -46.6650, "raio_m": 200 },
-  { "slug": "morumbi", "ordem": 8, "nome": "[PLACEHOLDER] Morumbi", "bairro": "Morumbi", "endereco": "Praça Roberto Gomes Pedrosa, 1 - Morumbi, São Paulo - SP", "descricao": "[PLACEHOLDER] Descrição curta do ponto.", "foto_qr_url": "", "lat": -23.6000, "lng": -46.7203, "raio_m": 300 }
+  {
+    "slug": "jarina-k-pop",
+    "ordem": 1,
+    "nome": "Jarina K-pop",
+    "bairro": "Liberdade",
+    "endereco": "Sogo Plaza Shopping - Rua Galvão Bueno, 40, lojas 20/30 - Liberdade, São Paulo - SP",
+    "descricao": "",
+    "foto_qr_url": "",
+    "lat": -23.5561,
+    "lng": -46.6352,
+    "raio_m": 150,
+    "_obs": "coordenadas aproximadas: confirmar"
+  },
+  {
+    "slug": "korea-mart",
+    "ordem": 2,
+    "nome": "Korea Mart",
+    "bairro": "Liberdade",
+    "endereco": "Rua dos Estudantes, 41 - Liberdade, São Paulo - SP",
+    "descricao": "",
+    "foto_qr_url": "",
+    "lat": -23.5560,
+    "lng": -46.6346,
+    "raio_m": 150,
+    "_obs": "coordenadas aproximadas: confirmar"
+  },
+  {
+    "slug": "we-coffee",
+    "ordem": 3,
+    "nome": "We Coffee",
+    "bairro": "Liberdade",
+    "endereco": "Rua dos Estudantes, 24 - Liberdade, São Paulo - SP",
+    "descricao": "",
+    "foto_qr_url": "",
+    "lat": -23.5559,
+    "lng": -46.6348,
+    "raio_m": 150,
+    "_obs": "coordenadas aproximadas: confirmar"
+  },
+  {
+    "slug": "emporio-azuki",
+    "ordem": 4,
+    "nome": "Empório Azuki",
+    "bairro": "Liberdade",
+    "endereco": "Rua Galvão Bueno, 16 - Liberdade, São Paulo - SP",
+    "descricao": "",
+    "foto_qr_url": "",
+    "lat": -23.5558,
+    "lng": -46.6353,
+    "raio_m": 150,
+    "_obs": "coordenadas aproximadas: confirmar"
+  }
 ]

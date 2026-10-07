@@ -27,7 +27,7 @@ Sem `RESEND_API_KEY`, o código de login aparece no console do servidor.
 
 ## Locais
 
-Os 8 locais atuais são **placeholders** (`[PLACEHOLDER]` no nome). Para trocar pela lista real, há dois caminhos:
+`data/locais.json` tem os locais reais confirmados até agora. As coordenadas marcadas com `"_obs": "coordenadas aproximadas: confirmar"` ainda precisam ser conferidas (no Google Maps, segure o dedo sobre o local e copie os números). Para adicionar ou mudar locais, há dois caminhos:
 
 1. Editar `data/locais.json` e rodar `npm run seed`. Os locais casam pelo `slug`; o token do QR de um local que já existe é mantido (QRs impressos continuam valendo).
 2. Usar o painel `/admin` → **Locais** (criar, editar, desativar, trocar token, baixar o QR em PNG).
