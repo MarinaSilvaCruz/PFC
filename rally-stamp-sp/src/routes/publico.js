@@ -31,7 +31,7 @@ function rotasPublicas(pool) {
 
   r.get('/locais', async (req, res) => {
     const { rows } = await pool.query(
-      `SELECT l.slug, l.nome, l.bairro, l.endereco, l.descricao, l.foto_qr_url, l.ordem, c.criado_em AS coletado_em
+      `SELECT l.slug, l.nome, l.bairro, l.endereco, l.descricao, l.foto_qr_url, l.ordem, l.tipo, l.horario, c.criado_em AS coletado_em
          FROM locais l
          LEFT JOIN carimbos c ON c.local_id = l.id AND c.participante_id = $1
         WHERE l.ativo

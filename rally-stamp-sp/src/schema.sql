@@ -11,8 +11,14 @@ CREATE TABLE IF NOT EXISTS locais (
   raio_m       INTEGER NOT NULL DEFAULT 150 CHECK (raio_m > 0),
   token        TEXT NOT NULL UNIQUE,
   ordem        INTEGER NOT NULL DEFAULT 0,
+  tipo         TEXT NOT NULL DEFAULT 'loja',
+  horario      TEXT NOT NULL DEFAULT '',
   ativo        BOOLEAN NOT NULL DEFAULT TRUE
 );
+
+-- Bancos criados antes dos tipos de local (loja / fan project)
+ALTER TABLE locais ADD COLUMN IF NOT EXISTS tipo TEXT NOT NULL DEFAULT 'loja';
+ALTER TABLE locais ADD COLUMN IF NOT EXISTS horario TEXT NOT NULL DEFAULT '';
 
 CREATE TABLE IF NOT EXISTS participantes (
   id                   SERIAL PRIMARY KEY,

@@ -14,10 +14,10 @@ async function semearLocais(pool, arquivo = ARQUIVO) {
     const { dados: d, erros } = validarLocal(item);
     if (erros) throw new Error(`Local inválido (${item.slug}): ${JSON.stringify(erros)}`);
     await pool.query(
-      `INSERT INTO locais (slug, nome, bairro, endereco, descricao, foto_qr_url, lat, lng, raio_m, ordem, ativo, token)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
-       ON CONFLICT (slug) DO UPDATE SET nome=$2, bairro=$3, endereco=$4, descricao=$5, foto_qr_url=$6, lat=$7, lng=$8, raio_m=$9, ordem=$10, ativo=$11`,
-      [d.slug, d.nome, d.bairro, d.endereco, d.descricao, d.foto_qr_url, d.lat, d.lng, d.raio_m, d.ordem, d.ativo, item.token || gerarToken()],
+      `INSERT INTO locais (slug, nome, bairro, endereco, descricao, foto_qr_url, lat, lng, raio_m, ordem, ativo, tipo, horario, token)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
+       ON CONFLICT (slug) DO UPDATE SET nome=$2, bairro=$3, endereco=$4, descricao=$5, foto_qr_url=$6, lat=$7, lng=$8, raio_m=$9, ordem=$10, ativo=$11, tipo=$12, horario=$13`,
+      [d.slug, d.nome, d.bairro, d.endereco, d.descricao, d.foto_qr_url, d.lat, d.lng, d.raio_m, d.ordem, d.ativo, d.tipo, d.horario, item.token || gerarToken()],
     );
   }
   return lista.length;

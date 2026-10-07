@@ -72,7 +72,8 @@ async function carregarLocais() {
   locais = (await json(await adm('/locais'))).dados.locais;
   $('#lista-locais').innerHTML = locais.map((l) => `
     <article class="local-admin" ${l.ativo ? '' : 'data-inativo'}>
-      <span class="chip ${l.ativo ? 'chip-menta' : 'chip-amarelo'} caption">#${l.ordem} · ${l.ativo ? 'ativo' : 'inativo'} · ${l.total_carimbos} carimbo(s)</span>
+      <span class="chip ${l.tipo === 'fan_project' ? 'chip-roxo' : 'chip-menta'} caption">${l.tipo === 'fan_project' ? 'Fan project' : 'Loja'}</span>
+      <span class="chip ${l.ativo ? 'chip-neutro' : 'chip-amarelo'} caption">#${l.ordem} · ${l.ativo ? 'ativo' : 'inativo'} · ${l.total_carimbos} carimbo(s)</span>
       <h2 class="heading-md">${esc(l.nome)}</h2>
       <p class="body-md texto-2">${esc(l.endereco)}</p>
       <p class="caption">lat ${l.lat}, lng ${l.lng} · raio ${l.raio_m} m</p>
@@ -90,7 +91,7 @@ const CAMPOS = [
   ['nome', 'Nome', 'text', 'largo'], ['slug', 'Slug (usado na URL do QR)', 'text'], ['ordem', 'Ordem na trilha', 'number'],
   ['bairro', 'Bairro', 'text'], ['raio_m', 'Raio (m)', 'number'], ['endereco', 'Endereço', 'text', 'largo'],
   ['lat', 'Latitude', 'text'], ['lng', 'Longitude', 'text'], ['foto_qr_url', 'URL da foto de onde o QR está', 'url', 'largo'],
-  ['descricao', 'Descrição', 'text', 'largo'],
+  ['descricao', 'Descrição', 'text', 'largo'], ['horario', 'Horário / datas (opcional)', 'text', 'largo'],
 ];
 
 function editarLocal(l = { raio_m: 150, ordem: locais.length + 1, ativo: true }) {
@@ -103,6 +104,14 @@ function editarLocal(l = { raio_m: 150, ordem: locais.length + 1, ativo: true })
           <input id="l-${n}" name="${n}" type="${t}" value="${esc(l[n] ?? '')}" ${t === 'number' ? 'inputmode="numeric"' : ''}>
           <p class="campo-erro" hidden></p>
         </div>`).join('')}
+      <div class="campo largo" data-campo="tipo">
+        <label for="l-tipo">Tipo</label>
+        <select id="l-tipo" name="tipo">
+          <option value="loja" ${l.tipo !== 'fan_project' ? 'selected' : ''}>Loja</option>
+          <option value="fan_project" ${l.tipo === 'fan_project' ? 'selected' : ''}>Fan project</option>
+        </select>
+        <p class="campo-erro" hidden></p>
+      </div>
       <label class="consentimento body-md largo"><input type="checkbox" name="ativo" ${l.ativo ? 'checked' : ''}> Ativo (aparece na cartela)</label>
       <p class="alerta largo" hidden></p>
       <button class="btn btn-primario btn-bloco largo">Salvar</button>

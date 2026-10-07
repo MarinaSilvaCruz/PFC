@@ -23,6 +23,7 @@
   - Paleta clara, **sem roxo**: coral (marca), menta (secundária), azul-céu (informativo), amarelo (conquista), vermelho-carimbo (estado "carimbado"). Versões `-600` para texto/ícone/botão, `-500` só decorativas, `-100` para fundos de badge.
   - Tipografia: Do Hyeon (títulos display), Baloo 2 (interface e texto), Nanum Pen Script (toques manuscritos, como a data do carimbo).
   - Cada local coletado vira um **selo circular** (`radius-full`) em vermelho-carimbo; a trilha entre os locais é pontilhada (`border-sand`).
+  - **Exceção do roxo (07/10/2026):** os locais do tipo *fan project* usam roxo (`purple-600` / `purple-500` / `purple-100`, cor da ARMY), sempre junto de um selo de coração, para a diferença não depender só da cor. Lojas seguem em menta. O resto da interface continua sem roxo.
   - Tom de voz caloroso e direto ("Bora carimbar?"), sem linguagem corporativa.
 - Toda a interface em **português do Brasil**.
 
@@ -129,6 +130,8 @@ Cada local tem:
 - `raio_m` (padrão 150; parques grandes podem usar um raio maior)
 - `token` do QR (**nunca exposto** nas respostas públicas da API)
 - `ordem` (posição na trilha)
+- `tipo`: `loja` (lojas do universo coreano) ou `fan_project` (ações feitas por fãs). Os dois tipos ficam misturados na mesma cartela e se diferenciam pela cor (menta × roxo) e pelo selo de coração nos fan projects.
+- `horario` (opcional): horário de funcionamento ou datas, por exemplo "Das 11h às 18h".
 
 **Status:** a lista real de locais **ainda não foi fornecida**. A v1 usou 6 locais fictícios marcados `[PLACEHOLDER]`. Começar com placeholders e deixar fácil de substituir.
 

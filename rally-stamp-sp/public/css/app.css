@@ -49,6 +49,17 @@ main { max-width: 480px; margin: 0 auto; padding: var(--space-12) var(--space-8)
 .chip-menta { background: var(--mint-100); }
 .chip-carimbo { background: var(--stamp-red-100); }
 .chip-ceu { background: var(--sky-100); }
+.chip-roxo { background: var(--purple-100); color: var(--ink-900); }
+.chip-roxo svg { color: var(--purple-600); }
+.chip-neutro { background: var(--surface-100); }
+.chips { display: flex; flex-wrap: wrap; gap: var(--space-4); }
+
+/* ---------- Legenda dos tipos ---------- */
+.legenda { display: flex; flex-wrap: wrap; gap: var(--space-8); list-style: none; padding: 0; margin-top: var(--space-4) !important; color: var(--ink-600); }
+.legenda li { display: flex; align-items: center; gap: var(--space-2); }
+.legenda-bola { width: 18px; height: 18px; border-radius: var(--radius-full); display: grid; place-items: center; }
+.legenda-loja { background: var(--mint-100); border: 2px solid var(--mint-600); }
+.legenda-fan { background: var(--purple-600); color: #fff; }
 
 /* ---------- Progresso ---------- */
 .progresso { display: flex; align-items: center; gap: var(--space-4); margin-top: var(--space-4) !important; }
@@ -107,6 +118,14 @@ main { max-width: 480px; margin: 0 auto; padding: var(--space-12) var(--space-8)
   content: ""; position: absolute; inset: -8px; border-radius: inherit; border: 2px solid var(--mint-500);
   opacity: 0; animation: pulso 2.4s ease-out infinite;
 }
+/* fan project: roxo + selo de coração (a cor nunca é a única diferença) */
+.selo-marca {
+  position: absolute; top: -4px; right: -4px; width: 26px; height: 26px; border-radius: var(--radius-full);
+  display: grid; place-items: center; background: var(--purple-600); color: #fff; border: 2px solid var(--surface-0); z-index: 1;
+}
+.selo[data-tipo="fan_project"][data-estado="ativo"] .selo-circulo { background: var(--purple-100); border-color: var(--purple-600); color: var(--purple-600); }
+.selo[data-tipo="fan_project"][data-estado="ativo"] .selo-circulo::after { border-color: var(--purple-500); }
+.selo[data-tipo="fan_project"][data-estado="coletado"] .selo-circulo { background: var(--purple-100); color: var(--purple-600); }
 /* coletado: carimbo */
 .selo[data-estado="coletado"] .selo-circulo { background: var(--stamp-red-100); color: var(--stamp-red-600); }
 .selo[data-estado="coletado"] .selo-tinta { transform: rotate(var(--giro, -8deg)); }
@@ -206,6 +225,9 @@ main { max-width: 480px; margin: 0 auto; padding: var(--space-12) var(--space-8)
 .links-mapa a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--space-8); border-radius: var(--radius-full); background: var(--sky-100); color: var(--ink-900); text-decoration: none; font-weight: 600; font-size: 14px; }
 .coletado-em { display: flex; align-items: center; gap: var(--space-8); background: var(--stamp-red-100); border-radius: var(--radius-md); padding: var(--space-4) var(--space-8); }
 .coletado-em .selo-tinta { width: 56px; height: 56px; color: var(--stamp-red-600); transform: rotate(-8deg); flex: none; }
+.coletado-em[data-tipo="fan_project"] { background: var(--purple-100); }
+.coletado-em[data-tipo="fan_project"] .selo-tinta { color: var(--purple-600); }
+.horario svg { color: var(--purple-600); }
 
 /* ---------- Check-in ---------- */
 .centro { text-align: center; }

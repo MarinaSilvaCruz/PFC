@@ -1,6 +1,6 @@
 import { $, api, esc, dataHora, toast } from './util.js';
 import { abrirFolha, fecharFolha, iniciarFolha } from './folha.js';
-import { cadeado, seloTinta, pin } from './icones.js';
+import { cadeado, seloTinta, pin, coracao, relogio } from './icones.js';
 import { pedirLogin, configurarContas } from './contas.js';
 import { iniciarCheckin, configurarCheckin } from './checkin.js';
 import { mostrarConclusao } from './conclusao.js';
@@ -9,6 +9,8 @@ const estado = { participante: null, locais: [], aposLogin: null };
 const CHAVE_PENDENTE = 'rally:checkin-pendente';
 
 const giro = (i) => `${((i * 37) % 17) - 8}deg`;
+const ehFan = (l) => l.tipo === 'fan_project';
+const NOME_TIPO = { loja: 'Loja', fan_project: 'Fan project' };
 const completo = () => estado.locais.length > 0 && estado.locais.every((l) => l.coletado_em);
 
 /* ---------- Abas ---------- */
@@ -40,16 +42,21 @@ function posicaoNaGrade(i, total) {
 function conteudoSelo(l, i) {
   const est = estadoDoLocal(l);
   const nome = esc(l.nome);
+  const marca = ehFan(l) ? `<span class="selo-marca">${coracao}</span>` : '';
   if (est === 'coletado') {
     return `
-      <span class="selo-circulo" style="--giro:${giro(i)}">${seloTinta(i + 1)}</span>
+      <span class="selo-circulo" style="--giro:${giro(i)}">${seloTinta(i + 1, l.tipo)}${marca}</span>
       <span class="selo-nome caption">${nome}</span>
       <span class="selo-data script-note">${dataHora(l.coletado_em).dia}</span>`;
   }
-  return `<span class="selo-circulo">${cadeado()}</span><span class="selo-nome caption">${nome}</span>`;
+  return `<span class="selo-circulo">${cadeado()}${marca}</span><span class="selo-nome caption">${nome}</span>`;
 }
 
 function rotulo(l) {
+  return `${NOME_TIPO[l.tipo] || 'Loja'}. ${rotuloEstado(l)}`;
+}
+
+function rotuloEstado(l) {
   const est = estadoDoLocal(l);
   if (est === 'coletado') return `${l.nome}: carimbado em ${dataHora(l.coletado_em).completo}`;
   if (est === 'ativo') return `${l.nome}: ainda não carimbado. Ver missão`;
@@ -63,10 +70,11 @@ function renderCartela() {
     const p = posicaoNaGrade(i, total);
     return `
       <li style="grid-row:${p.linha}; grid-column:${p.inicio} / span 2">
-        <button class="selo" data-slug="${esc(l.slug)}" data-estado="${estadoDoLocal(l)}" aria-label="${esc(rotulo(l))}">${conteudoSelo(l, i)}</button>
+        <button class="selo" data-slug="${esc(l.slug)}" data-tipo="${esc(l.tipo || 'loja')}" data-estado="${estadoDoLocal(l)}" aria-label="${esc(rotulo(l))}">${conteudoSelo(l, i)}</button>
       </li>`;
   }).join('');
   $('#cartela-status').hidden = total > 0;
+  $('#legenda').hidden = !estado.locais.some(ehFan);
 
   const coletados = estado.locais.filter((l) => l.coletado_em).length;
   $('#progresso').hidden = !estado.participante;
@@ -128,12 +136,17 @@ function abrirLocal(slug) {
     : '<div class="foto-qr foto-vazia body-md">A foto de onde o QR está fixado aparece aqui em breve.</div>';
   const el = abrirFolha(`
     <div class="folha-topo">
-      <span class="chip ${l.coletado_em ? 'chip-carimbo' : 'chip-menta'} caption">${l.coletado_em ? 'Carimbado' : `Parada ${i + 1} de ${estado.locais.length}`}</span>
+      <div class="chips">
+        <span class="chip ${ehFan(l) ? 'chip-roxo' : 'chip-menta'} caption">${ehFan(l) ? coracao : ''}${NOME_TIPO[l.tipo] || 'Loja'}</span>
+        <span class="chip ${l.coletado_em ? 'chip-carimbo' : 'chip-neutro'} caption">${l.coletado_em ? 'Carimbado' : `Parada ${i + 1} de ${estado.locais.length}`}</span>
+      </div>
       <h2 class="heading-lg" id="folha-titulo">${esc(l.nome)}</h2>
       ${l.bairro ? `<p class="body-md texto-2">${esc(l.bairro)}</p>` : ''}
     </div>
+    ${l.descricao ? `<p class="body-lg">${esc(l.descricao)}</p>` : ''}
+    ${l.horario ? `<p class="endereco body-md horario">${relogio}<span>${esc(l.horario)}</span></p>` : ''}
     ${l.coletado_em ? `
-      <div class="coletado-em">${seloTinta(i + 1)}
+      <div class="coletado-em" data-tipo="${esc(l.tipo || 'loja')}">${seloTinta(i + 1, l.tipo)}
         <div><p class="heading-sm">Carimbo coletado!</p><p class="script-note">${dataHora(l.coletado_em).completo}</p></div>
       </div>` : ''}
     <div>
@@ -147,7 +160,6 @@ function abrirLocal(slug) {
       ${foto}
       <figcaption class="script-note">o QR fica aqui</figcaption>
     </figure>
-    ${l.descricao ? `<p class="body-lg">${esc(l.descricao)}</p>` : ''}
     ${l.coletado_em ? '' : `
       <div class="acoes">
         <button class="btn btn-primario btn-bloco" data-acao="estou-aqui">Estou aqui</button>

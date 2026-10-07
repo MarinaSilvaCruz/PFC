@@ -3,21 +3,22 @@ import { abrirFolha } from './folha.js';
 
 const cor = (nome) => getComputedStyle(document.documentElement).getPropertyValue(`--${nome}`).trim();
 
-function seloCanvas(ctx, x, y, r, numero, giro) {
+function seloCanvas(ctx, x, y, r, numero, giro, tipo) {
+  const fan = tipo === 'fan_project';
   ctx.save();
   ctx.translate(x, y);
   ctx.rotate(giro);
-  ctx.fillStyle = cor('stamp-red-100');
+  ctx.fillStyle = cor(fan ? 'purple-100' : 'stamp-red-100');
   ctx.beginPath(); ctx.arc(0, 0, r, 0, Math.PI * 2); ctx.fill();
-  ctx.strokeStyle = cor('stamp-red-600');
-  ctx.fillStyle = cor('stamp-red-600');
+  ctx.strokeStyle = cor(fan ? 'purple-600' : 'stamp-red-600');
+  ctx.fillStyle = cor(fan ? 'purple-600' : 'stamp-red-600');
   ctx.lineWidth = r * 0.08;
   ctx.beginPath(); ctx.arc(0, 0, r * 0.9, 0, Math.PI * 2); ctx.stroke();
   ctx.lineWidth = r * 0.035;
   ctx.beginPath(); ctx.arc(0, 0, r * 0.74, 0, Math.PI * 2); ctx.stroke();
   ctx.textAlign = 'center';
   ctx.font = `${r * 0.25}px "Do Hyeon"`;
-  ctx.fillText('RALLY SP', 0, -r * 0.28);
+  ctx.fillText(fan ? 'FAN PROJ' : 'RALLY SP', 0, -r * 0.28);
   ctx.font = `${r * 0.66}px "Do Hyeon"`;
   ctx.fillText(String(numero).padStart(2, '0'), 0, r * 0.42);
   ctx.restore();
@@ -36,7 +37,7 @@ async function desenharCartao(locais, participante) {
   ctx.fillStyle = cor('surface-50');
   ctx.fillRect(0, 0, W, H);
   // confete
-  const confete = ['coral-500', 'mint-500', 'yellow-500', 'sky-500'];
+  const confete = ['coral-500', 'mint-500', 'yellow-500', 'purple-500'];
   for (let i = 0; i < 46; i++) {
     ctx.fillStyle = cor(confete[i % confete.length]);
     const x = (i * 211) % W;
@@ -77,7 +78,7 @@ async function desenharCartao(locais, participante) {
     const x0 = cartela.x + (cartela.w - passo * naLinha) / 2 + passo / 2;
     const x = x0 + passo * (linha % 2 ? naLinha - 1 - k : k);
     const y = cartela.y + 40 + alturaLinha * linha + r + 4;
-    seloCanvas(ctx, x, y, r, i + 1, ((i * 37) % 17 - 8) * Math.PI / 180);
+    seloCanvas(ctx, x, y, r, i + 1, ((i * 37) % 17 - 8) * Math.PI / 180, l.tipo);
     ctx.fillStyle = cor('ink-900');
     ctx.font = '600 26px "Baloo 2"';
     const nome = l.nome.replace(/^\[PLACEHOLDER\]\s*/, '');

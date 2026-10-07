@@ -1,6 +1,9 @@
 const crypto = require('node:crypto');
 const { texto, numero } = require('./validacao');
 
+/** Tipos de local: lojas parceiras e fan projects (ações feitas por fãs). */
+const TIPOS = ['loja', 'fan_project'];
+
 const gerarToken = () => crypto.randomBytes(12).toString('base64url');
 
 const urlDoQr = (local) => `${(process.env.PUBLIC_URL || '').replace(/\/$/, '')}/l/${encodeURIComponent(local.slug)}?t=${encodeURIComponent(local.token)}`;
@@ -19,6 +22,8 @@ function validarLocal(b = {}) {
   const raio = b.raio_m === undefined || b.raio_m === '' ? 150 : numero(Number(b.raio_m), 10, 5000);
   if (raio === null) erros.raio_m = 'Entre 10 e 5000 m.';
   const ordem = numero(Number(b.ordem ?? 0), -1e6, 1e6);
+  const tipo = b.tipo === undefined || b.tipo === '' ? 'loja' : b.tipo;
+  if (!TIPOS.includes(tipo)) erros.tipo = 'Escolha loja ou fan project.';
   if (Object.keys(erros).length) return { erros };
   return {
     dados: {
@@ -32,9 +37,11 @@ function validarLocal(b = {}) {
       lng,
       raio_m: Math.round(raio),
       ordem: Math.round(ordem ?? 0),
+      tipo,
+      horario: texto(b.horario, 200),
       ativo: b.ativo === undefined ? true : Boolean(b.ativo),
     },
   };
 }
 
-module.exports = { gerarToken, urlDoQr, validarLocal };
+module.exports = { TIPOS, gerarToken, urlDoQr, validarLocal };
