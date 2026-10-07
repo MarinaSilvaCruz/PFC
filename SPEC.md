@@ -18,11 +18,12 @@
 
 - **Mobile first.** Tudo é desenhado para celular; o desktop é secundário.
 - **Referência de mecânica:** um rally de carimbos de outra turnê (tela "MAP" com carimbos circulares em trilha). **Usar só a mecânica e a estrutura, nunca o visual.**
-- **Identidade própria (definida na v1, manter):**
-  - Conceito: livro de carimbos de viagem / selo *dojang* coreano.
-  - Paleta: papel hanji (`#f3ead6` / `#eadfc4`), tinta preta-acastanhada (`#2a2420`), vermelho de carimbo/dojang (`#b93a24`), verde celadon (`#7fa396`), dourado sutil (`#b08a2e`). **Nada de roxo** nem paleta associada à turnê.
-  - Tipografia: Noto Serif KR (títulos) + Noto Sans KR (corpo).
-  - Cada local coletado vira um **carimbo vermelho circular** estilo dojang/passaporte.
+- **Identidade visual: design system "Rally Stamp SP"** (artifact https://claude.ai/artifact/3gYmkqzHJuhHaXsj8nboHm, criado em 04/10/2026). Substitui a identidade "hanji/dojang" da v1. Cópia dos tokens em `rally-stamp-sp/design-system/`.
+  - Conceito: caderno de viagem de fã: papelaria coreana, carimbo de passaporte, washi tape, polaroid.
+  - Paleta clara, **sem roxo**: coral (marca), menta (secundária), azul-céu (informativo), amarelo (conquista), vermelho-carimbo (estado "carimbado"). Versões `-600` para texto/ícone/botão, `-500` só decorativas, `-100` para fundos de badge.
+  - Tipografia: Do Hyeon (títulos display), Baloo 2 (interface e texto), Nanum Pen Script (toques manuscritos, como a data do carimbo).
+  - Cada local coletado vira um **selo circular** (`radius-full`) em vermelho-carimbo; a trilha entre os locais é pontilhada (`border-sand`).
+  - Tom de voz caloroso e direto ("Bora carimbar?"), sem linguagem corporativa.
 - Toda a interface em **português do Brasil**.
 
 ---

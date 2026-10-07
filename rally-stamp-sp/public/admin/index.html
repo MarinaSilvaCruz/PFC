@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Admin · Rally Stamp SP</title>
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Do+Hyeon&display=swap">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/admin/admin.css">
+  <script type="module" src="/admin/admin.js"></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="topo-marca admin-largura">
+      <span class="marca display-sm">Rally Stamp SP</span>
+      <span class="chip chip-ceu caption">admin</span>
+    </div>
+    <nav class="abas admin-largura" role="tablist" id="abas" hidden>
+      <button class="aba heading-sm" role="tab" aria-selected="true" data-aba="participantes">Participantes</button>
+      <button class="aba heading-sm" role="tab" aria-selected="false" data-aba="locais">Locais</button>
+    </nav>
+  </header>
+
+  <main class="admin-largura">
+    <form id="entrar" class="form cartao">
+      <h1 class="heading-lg">Entrar no admin</h1>
+      <div class="campo">
+        <label for="token">Token de admin</label>
+        <input id="token" type="password" autocomplete="current-password" required>
+      </div>
+      <p class="alerta" id="entrar-erro" hidden></p>
+      <button class="btn btn-primario btn-bloco">Entrar</button>
+    </form>
+
+    <section id="participantes" hidden>
+      <div class="barra">
+        <h1 class="heading-lg">Participantes <span class="texto-2" id="total-participantes"></span></h1>
+        <button class="btn btn-secundario" id="baixar-csv">Exportar CSV</button>
+      </div>
+      <div class="tabela-rolagem">
+        <table class="tabela body-md" id="tabela-participantes"></table>
+      </div>
+    </section>
+
+    <section id="locais" hidden>
+      <div class="barra">
+        <h1 class="heading-lg">Locais</h1>
+        <button class="btn btn-primario" id="novo-local">Novo local</button>
+      </div>
+      <p class="body-md texto-2">O QR de cada local leva para <code>/l/&lt;slug&gt;?t=&lt;token&gt;</code>. Trocar o token invalida os QRs já impressos daquele local.</p>
+      <div id="lista-locais" class="lista-locais"></div>
+    </section>
+  </main>
+
+  <dialog class="folha" id="folha" aria-labelledby="folha-titulo">
+    <button class="folha-fechar" id="folha-fechar" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="folha-conteudo" id="folha-conteudo"></div>
+  </dialog>
+  <div class="toast body-md" id="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

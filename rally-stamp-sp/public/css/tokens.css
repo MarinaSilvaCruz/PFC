@@ -1,0 +1,47 @@
+/* Rally Stamp SP — gerado de design-system/tokens.json por scripts/gerar-tokens-css.js. Não edite à mão. */
+:root {
+  --surface-50: #FFF8EF;
+  --surface-0: #FFFFFF;
+  --surface-100: #F3E9DA;
+  --border-sand: #E7D9C3;
+  --border-control: #4B5165;
+  --focus-ring: #1565C2;
+  --ink-900: #1C2340;
+  --ink-600: #4B5165;
+  --coral-600: #C8274A;
+  --coral-500: #FF5D73;
+  --coral-100: #FFE1E6;
+  --mint-600: #0E7A72;
+  --mint-500: #1FB6AC;
+  --mint-100: #D8F3F0;
+  --sky-600: #1565C2;
+  --sky-500: #4FA8FF;
+  --sky-100: #DDEEFF;
+  --yellow-500: #FFC94D;
+  --yellow-100: #FFF1D6;
+  --stamp-red-600: #C1121F;
+  --stamp-red-500: #E63946;
+  --stamp-red-100: #FBD6D9;
+  --font-display: "Do Hyeon", sans-serif;
+  --font-sans: "Baloo 2", system-ui, sans-serif;
+  --font-script: "Nanum Pen Script", cursive;
+  --space-2: 4px;
+  --space-4: 8px;
+  --space-8: 16px;
+  --space-12: 24px;
+  --space-16: 32px;
+  --space-24: 48px;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-full: 999px;
+}
+
+.display-lg { font-family: var(--font-display); font-size: 64px; line-height: 61px; font-weight: 400; }
+.display-sm { font-family: var(--font-display); font-size: 36px; line-height: 40px; font-weight: 400; }
+.heading-lg { font-family: var(--font-sans); font-size: 24px; line-height: 32px; font-weight: 700; }
+.heading-md { font-family: var(--font-sans); font-size: 20px; line-height: 28px; font-weight: 700; }
+.heading-sm { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 600; }
+.body-lg { font-family: var(--font-sans); font-size: 16px; line-height: 24px; font-weight: 400; }
+.body-md { font-family: var(--font-sans); font-size: 14px; line-height: 20px; font-weight: 400; }
+.caption { font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 500; }
+.script-note { font-family: var(--font-script); font-size: 22px; line-height: 28px; font-weight: 400; }
