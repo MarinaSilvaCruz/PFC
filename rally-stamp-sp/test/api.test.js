@@ -99,6 +99,20 @@ test('cadastro, código, check-in e admin', { skip: pular }, async () => {
   assert.equal((await c(`/api/admin/locais/${locais.dados.locais[0].id}`, { method: 'DELETE', ...adm })).status, 409);
 });
 
+test('falha no envio do e-mail vira mensagem clara, não erro genérico', { skip: pular }, async () => {
+  const email = require('../src/email');
+  const original = email.enviarCodigo;
+  email.enviarCodigo = async () => { throw new Error('Resend 403'); };
+  try {
+    const r = await cliente()('/api/auth/cadastro', { method: 'POST', body: { email: 'outra@ex.com', telefone: '21991234567', cidade: 'Rio', estado: 'RJ', consentimento: true } });
+    assert.equal(r.status, 502);
+    assert.equal(r.dados.erro, 'email');
+    assert.match(r.dados.mensagem, /Não conseguimos enviar o código/);
+  } finally {
+    email.enviarCodigo = original;
+  }
+});
+
 test('escritas da API exigem JSON', { skip: pular }, async () => {
   const r = await fetch(`${base}/api/auth/entrar`, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'email=a@b.com' });
   assert.equal(r.status, 415);

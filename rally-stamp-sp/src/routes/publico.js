@@ -43,7 +43,15 @@ function rotasPublicas(pool) {
 
   async function enviar(res, destino) {
     const codigo = await auth.criarCodigo(pool, destino);
-    await email.enviarCodigo(destino, codigo);
+    try {
+      await email.enviarCodigo(destino, codigo);
+    } catch (err) {
+      console.error(`Falha ao enviar o código para ${destino}:`, err.message);
+      return res.status(502).json({
+        erro: 'email',
+        mensagem: 'Não conseguimos enviar o código para este e-mail agora. Confira se ele está certo e tente de novo em alguns minutos.',
+      });
+    }
     res.json({ ok: true, email: destino });
   }
 
