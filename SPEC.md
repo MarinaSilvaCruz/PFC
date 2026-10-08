@@ -130,7 +130,7 @@ Cada local tem:
 - `raio_m` (padrão 150; parques grandes podem usar um raio maior)
 - `token` do QR (**nunca exposto** nas respostas públicas da API)
 - `ordem` (posição na trilha)
-- `tipo`: `loja` (lojas do universo coreano) ou `fan_project` (ações feitas por fãs). Os dois tipos ficam misturados na mesma cartela e se diferenciam pela cor (menta × roxo) e pelo selo de coração nos fan projects.
+- `tipo`: `loja` (lojas e cafés de K-pop e cultura asiática; na interface, "Lojas e cafés") ou `fan_project` (ações feitas por fãs). Os dois tipos ficam misturados na mesma cartela e se diferenciam pela cor (menta × roxo) e pelo selo de coração nos fan projects.
 - `horario` (opcional): horário de funcionamento ou datas, por exemplo "Das 11h às 18h".
 
 **Status:** a lista real de locais **ainda não foi fornecida**. A v1 usou 6 locais fictícios marcados `[PLACEHOLDER]`. Começar com placeholders e deixar fácil de substituir.
