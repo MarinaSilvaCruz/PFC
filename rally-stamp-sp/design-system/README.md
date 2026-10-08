@@ -65,11 +65,11 @@ A metáfora central do produto é o carimbo de viagem, então o sistema gráfico
 
 ### Fan projects: roxo + selo de coração
 
-O rally mistura dois tipos de parada na mesma cartela: **lojas e cafés** de K-pop e cultura asiática (nem todos coreanos) e **fan projects** (exposições, murais, cafés temáticos organizados por fãs). A diferença aparece em duas camadas, para nunca depender só da cor:
+O rally mistura dois tipos de parada na mesma cartela: **lojas, cafés e espaços culturais** de K-pop e cultura asiática (nem todos coreanos) e **fan projects** (exposições, murais, cafés temáticos organizados por fãs). A diferença aparece em duas camadas, para nunca depender só da cor:
 
 - **Cor:** lojas usam menta (`mint-600` no anel e no cadeado, `mint-100` de fundo); fan projects usam roxo (`purple-600` no anel e no cadeado, `purple-100` de fundo). O carimbo coletado de loja sai em `stamp-red-600` com "RALLY SP"; o de fan project sai em `purple-600` com "FAN PROJ".
 - **Selo de coração:** um círculo de 26px em `purple-600`, com coração branco e borda `surface-0` de 2px, preso no canto superior direito do selo de todo fan project, em todos os estados (inclusive o cinza de quem ainda não entrou). Lojas não levam selo.
-- **Legenda e chip:** a cartela mostra a legenda "Lojas e cafés · Fan projects", e o card do local leva um chip de tipo (`mint-100` ou `purple-100`, com o coração em `purple-600` no de fan project).
+- **Legenda e chip:** a cartela mostra a legenda "Lojas, cafés e cultura · Fan projects", e o card do local leva um chip de tipo (`mint-100` ou `purple-100`, com o coração em `purple-600` no de fan project).
 
 Evitar: gradiente roxo-azul (clichê genérico de "app de IA"), emoji dentro de card como ícone, cards com borda lateral colorida grossa, qualquer forma de escudo/brasão que pareça logotipo oficial de grupo.
 

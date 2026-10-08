@@ -13,7 +13,7 @@ const FOTO_PROVISORIA = '/img/foto-placeholder.svg';
 
 const giro = (i) => `${((i * 37) % 17) - 8}deg`;
 const ehFan = (l) => l.tipo === 'fan_project';
-const NOME_TIPO = { loja: 'Lojas e cafés', fan_project: 'Fan project' };
+const NOME_TIPO = { loja: 'Lojas, cafés e cultura', fan_project: 'Fan project' };
 const completo = () => estado.locais.length > 0 && estado.locais.every((l) => l.coletado_em);
 
 /* ---------- Menu: página única, o menu rola até a seção ---------- */
