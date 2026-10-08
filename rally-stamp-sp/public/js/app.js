@@ -13,18 +13,41 @@ const FOTO_PROVISORIA = '/img/foto-placeholder.svg';
 
 const giro = (i) => `${((i * 37) % 17) - 8}deg`;
 const ehFan = (l) => l.tipo === 'fan_project';
-const NOME_TIPO = { loja: 'Loja', fan_project: 'Fan project' };
+const NOME_TIPO = { loja: 'Lojas e cafés', fan_project: 'Fan project' };
 const completo = () => estado.locais.length > 0 && estado.locais.every((l) => l.coletado_em);
 
-/* ---------- Abas ---------- */
-function trocarAba(nome) {
-  document.querySelectorAll('[role="tab"]').forEach((t) => {
-    const ativa = t.dataset.aba === nome;
-    t.setAttribute('aria-selected', String(ativa));
-    t.tabIndex = ativa ? 0 : -1;
-    $(`#${t.getAttribute('aria-controls')}`).hidden = !ativa;
+/* ---------- Menu: página única, o menu rola até a seção ---------- */
+function marcarMenu(secao) {
+  document.querySelectorAll('.aba[data-secao]').forEach((a) => {
+    if (a.dataset.secao === secao) a.setAttribute('aria-current', 'true');
+    else a.removeAttribute('aria-current');
   });
-  if (nome === 'mapa') desenharTrilha();
+}
+
+function irPara(secao) {
+  if (secao === 'mapa') window.scrollTo({ top: 0 });
+  else $(`#${secao}`).scrollIntoView({ block: 'start' });
+  marcarMenu(secao);
+}
+
+function iniciarMenu() {
+  // A altura do topo fixo define onde a seção para ao rolar.
+  const topo = $('.topo');
+  const medir = () => document.documentElement.style.setProperty('--altura-topo', `${topo.offsetHeight + 8}px`);
+  medir();
+  new ResizeObserver(medir).observe(topo);
+
+  document.querySelectorAll('a[data-secao]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      irPara(a.dataset.secao);
+    });
+  });
+  // O item do menu acompanha a rolagem: "Informações" fica ativo quando a seção passa do meio da tela.
+  const info = $('#informacoes');
+  const atualizar = () => marcarMenu(info.getBoundingClientRect().top < window.innerHeight / 2 ? 'informacoes' : 'mapa');
+  window.addEventListener('scroll', atualizar, { passive: true });
+  atualizar();
 }
 
 /* ---------- Cartela ---------- */
@@ -187,7 +210,6 @@ async function carregar() {
 function carimbar(slug, coletadoEm) {
   const l = estado.locais.find((x) => x.slug === slug);
   if (l) l.coletado_em = coletadoEm;
-  trocarAba('mapa');
   renderCartela();
   const circulo = $(`.selo[data-slug="${CSS.escape(slug)}"] .selo-circulo`);
   circulo?.querySelector('.selo-tinta')?.classList.add('batendo');
@@ -226,16 +248,7 @@ async function iniciar() {
   iniciarFolha();
   $('[data-texto-privacidade]').append($('#tpl-privacidade').content.cloneNode(true));
 
-  document.querySelectorAll('[role="tab"]').forEach((t) => {
-    t.addEventListener('click', () => trocarAba(t.dataset.aba));
-    t.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        const outra = t.dataset.aba === 'mapa' ? 'info' : 'mapa';
-        trocarAba(outra);
-        $(`[data-aba="${outra}"]`).focus();
-      }
-    });
-  });
+  iniciarMenu();
   $('#grade').addEventListener('click', (e) => {
     const selo = e.target.closest('.selo');
     if (selo) abrirLocal(selo.dataset.slug);
@@ -244,7 +257,7 @@ async function iniciar() {
   $('#btn-sair').addEventListener('click', async () => {
     await api('/auth/sair', { method: 'POST' });
     await carregar();
-    trocarAba('mapa');
+    irPara('mapa');
     toast('Você saiu. Até a próxima!');
   });
   new ResizeObserver(() => desenharTrilha()).observe($('#cartela'));

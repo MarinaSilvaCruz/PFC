@@ -29,19 +29,20 @@
       <span class="marca display-sm">Rally Stamp SP</span>
       <span class="chip chip-amarelo caption">de fã · não-oficial</span>
     </div>
-    <nav class="abas" role="tablist" aria-label="Seções">
-      <button class="aba heading-sm" role="tab" id="tab-mapa" aria-controls="aba-mapa" aria-selected="true" data-aba="mapa">Mapa</button>
-      <button class="aba heading-sm" role="tab" id="tab-info" aria-controls="aba-info" aria-selected="false" data-aba="info" tabindex="-1">Informações</button>
+    <nav class="abas" aria-label="Seções da página">
+      <a class="aba heading-sm" href="#mapa" data-secao="mapa" aria-current="true">Mapa</a>
+      <a class="aba heading-sm" href="#informacoes" data-secao="informacoes">Informações</a>
     </nav>
   </header>
 
   <main>
-    <section id="aba-mapa" role="tabpanel" aria-labelledby="tab-mapa" class="painel">
+    <section id="mapa" class="painel secao" aria-labelledby="titulo-mapa">
       <div class="mapa-cabecalho">
-        <h1 class="heading-lg">Seu passaporte de fã</h1>
+        <h1 class="heading-lg" id="titulo-mapa">Seu passaporte de fã</h1>
+        <p class="body-md">O roteiro de ARMY para ARMY pelos dias de show do BTS em São Paulo.</p>
         <p class="body-md texto-2" id="mapa-instrucao">Toque num carimbo para ver a missão.</p>
         <ul class="legenda caption" id="legenda" aria-label="Tipos de parada" hidden>
-          <li><span class="legenda-bola legenda-loja" aria-hidden="true"></span>Lojas</li>
+          <li><span class="legenda-bola legenda-loja" aria-hidden="true"></span>Lojas e cafés</li>
           <li><span class="legenda-bola legenda-fan" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10"><path d="M12 21s-7.5-4.6-9.4-9.3C1.3 8.4 3.3 5 6.7 5c2 0 3.6 1.1 4.3 2.6h2C13.7 6.1 15.3 5 17.3 5c3.4 0 5.4 3.4 4.1 6.7C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></span>Fan projects</li>
         </ul>
         <div class="progresso" id="progresso" hidden>
@@ -61,10 +62,35 @@
         <ol class="cartela-grade" id="grade" aria-label="Locais do rally"></ol>
         <p class="cartela-carregando body-md texto-2" id="cartela-status">Carregando os locais…</p>
       </div>
+
+      <a class="ir-info" href="#informacoes" data-secao="informacoes">
+        <span class="heading-sm">O que é o Rally Stamp SP?</span>
+        <span class="body-md texto-2">Entenda o rally e como carimbar</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </section>
 
-    <section id="aba-info" role="tabpanel" aria-labelledby="tab-info" class="painel" hidden>
-      <h1 class="heading-lg">Informações</h1>
+    <section id="informacoes" class="painel secao" aria-labelledby="titulo-info">
+      <div class="intro">
+        <span class="chip chip-coral caption">Feito por ARMY, para ARMY</span>
+        <h2 class="display-sm" id="titulo-info">Seu roteiro de fã pelos dias de show</h2>
+        <p class="body-lg">O BTS vem para São Paulo, e a cidade inteira entra no clima. Entre um show e outro tem muita coisa acontecendo: fan projects montados com carinho por outras ARMYs, cafés coreanos com cardápio temático e lojinhas cheias de lembrancinhas para levar para casa.</p>
+        <p class="body-lg">O Rally Stamp SP junta tudo isso num lugar só. Cada parada vale um carimbo no seu passaporte de fã: você chega, lê o QR do ponto e o selo aparece na hora. Com a cartela completa, você ganha uma imagem para guardar de lembrança e mostrar por aí.</p>
+        <p class="body-lg">Veio de longe ou mora logo ali? Tanto faz. Esse é o mapa para você não perder nada do que a fandom preparou.</p>
+      </div>
+
+      <ul class="tipos" aria-label="O que você encontra no caminho">
+        <li class="tipo tipo-loja">
+          <span class="tipo-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 8h14l-1 12H6L5 8zM9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+          <p class="heading-sm">Lojas e cafés</p>
+          <p class="body-md">Cafés coreanos e lojinhas de K-pop para fazer uma pausa, provar alguma coisa nova e garimpar lembrancinhas.</p>
+        </li>
+        <li class="tipo tipo-fan">
+          <span class="tipo-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 21s-7.5-4.6-9.4-9.3C1.3 8.4 3.3 5 6.7 5c2 0 3.6 1.1 4.3 2.6h2C13.7 6.1 15.3 5 17.3 5c3.4 0 5.4 3.4 4.1 6.7C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></span>
+          <p class="heading-sm">Fan projects</p>
+          <p class="body-md">Exposições, murais e celebrações organizados por fãs. Na cartela, eles aparecem em roxo, com coração.</p>
+        </li>
+      </ul>
 
       <div class="aviso-fa">
         <p class="heading-sm">Projeto de fã, não-oficial</p>
@@ -77,9 +103,8 @@
           <li>Crie sua conta (leva um minuto).</li>
           <li>Escolha um ponto na cartela e veja o endereço e a foto de onde o QR está.</li>
           <li>Chegando lá, toque em <b>Estou aqui</b>, permita a localização e aponte a câmera para o QR.</li>
-          <li>Pronto: o carimbo aparece no seu passaporte. Os pontos podem ser visitados em qualquer ordem.</li>
+          <li>Pronto: o carimbo aparece no seu passaporte. Os pontos podem ser visitados em qualquer ordem e em qualquer horário.</li>
         </ol>
-        <p class="body-md">São dois tipos de parada: <b>lojas</b> do universo coreano e <b>fan projects</b>, ações feitas por fãs (em roxo, com coração).</p>
         <p class="body-md texto-2">Cada ponto vale um carimbo por pessoa. É preciso estar no local: a gente confere a sua localização na hora.</p>
       </details>
 

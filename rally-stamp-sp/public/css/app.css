@@ -31,13 +31,33 @@ a { color: var(--sky-600); text-underline-offset: 3px; }
 .abas { display: flex; max-width: 480px; margin: var(--space-4) auto 0; }
 .aba {
   flex: 1; background: none; border: 0; padding: var(--space-4) 0 var(--space-4);
-  color: var(--ink-600); cursor: pointer; position: relative;
+  color: var(--ink-600); cursor: pointer; position: relative; text-align: center; text-decoration: none;
 }
-.aba[aria-selected="true"] { color: var(--coral-600); }
-.aba[aria-selected="true"]::after {
+.aba[aria-current="true"] { color: var(--coral-600); }
+.aba[aria-current="true"]::after {
   content: ""; position: absolute; left: 20%; right: 20%; bottom: -2px; height: 6px;
   background: var(--coral-500); border-radius: 2px; transform: rotate(-1deg);
 }
+
+/* ---------- Seções (página única: mapa em cima, informações embaixo) ---------- */
+html { scroll-behavior: smooth; }
+.secao { scroll-margin-top: var(--altura-topo, 112px); }
+.secao + .secao { margin-top: var(--space-24); padding-top: var(--space-16); border-top: 2px dashed var(--border-sand); }
+.ir-info {
+  display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: var(--space-8);
+  padding: var(--space-8); border-radius: var(--radius-md); background: var(--surface-100);
+  color: var(--ink-900); text-decoration: none;
+}
+.ir-info svg { grid-column: 2; grid-row: 1 / span 2; color: var(--coral-600); }
+.intro > * + * { margin-top: var(--space-8); }
+.intro h2 { text-wrap: balance; }
+.chip-coral { background: var(--coral-100); }
+.tipos { list-style: none; padding: 0; display: grid; gap: var(--space-8); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.tipo { background: var(--surface-0); border-radius: var(--radius-md); padding: var(--space-8); }
+.tipo > * + * { margin-top: var(--space-2); }
+.tipo-icone { width: 40px; height: 40px; border-radius: var(--radius-full); display: grid; place-items: center; margin-bottom: var(--space-4); }
+.tipo-loja .tipo-icone { background: var(--mint-100); color: var(--mint-600); }
+.tipo-fan .tipo-icone { background: var(--purple-600); color: #fff; }
 
 /* ---------- Painéis ---------- */
 main { max-width: 480px; margin: 0 auto; padding: var(--space-12) var(--space-8) var(--space-24); }
@@ -255,5 +275,6 @@ main { max-width: 480px; margin: 0 auto; padding: var(--space-12) var(--space-8)
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
