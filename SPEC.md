@@ -1,4 +1,4 @@
-# Rally Stamp SP (não-oficial) — Especificação do produto
+# Unofficial Stamp Rally (não-oficial) — Especificação do produto
 
 > Documento de handoff. Resume tudo o que foi decidido até 03/10/2026 no chat do Claude, para recomeçar o projeto **do zero** no Claude Code. Uma primeira versão funcional existiu (ver seção 10), mas será **refeita** a partir desta spec.
 
@@ -18,7 +18,7 @@
 
 - **Mobile first.** Tudo é desenhado para celular; o desktop é secundário.
 - **Referência de mecânica:** um rally de carimbos de outra turnê (tela "MAP" com carimbos circulares em trilha). **Usar só a mecânica e a estrutura, nunca o visual.**
-- **Identidade visual: design system "Rally Stamp SP"** (artifact https://claude.ai/artifact/3gYmkqzHJuhHaXsj8nboHm, criado em 04/10/2026). Substitui a identidade "hanji/dojang" da v1. Cópia dos tokens em `rally-stamp-sp/design-system/`.
+- **Identidade visual: design system "Unofficial Stamp Rally"** (artifact https://claude.ai/artifact/3gYmkqzHJuhHaXsj8nboHm, criado em 04/10/2026). Substitui a identidade "hanji/dojang" da v1. Cópia dos tokens em `rally-stamp-sp/design-system/`.
   - Conceito: caderno de viagem de fã: papelaria coreana, carimbo de passaporte, washi tape, polaroid.
   - Paleta clara, **sem roxo**: coral (marca), menta (secundária), azul-céu (informativo), amarelo (conquista), vermelho-carimbo (estado "carimbado"). Versões `-600` para texto/ícone/botão, `-500` só decorativas, `-100` para fundos de badge.
   - Tipografia: Do Hyeon (títulos display), Baloo 2 (interface e texto), Nanum Pen Script (toques manuscritos, como a data do carimbo).

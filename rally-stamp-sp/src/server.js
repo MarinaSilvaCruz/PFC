@@ -10,7 +10,7 @@ const { semearLocais } = require('./seed');
   if (!process.env.RESEND_API_KEY) console.warn('RESEND_API_KEY ausente: os códigos de login serão impressos no console.');
 
   const port = Number(process.env.PORT || 3000);
-  criarApp(pool).listen(port, () => console.log(`Rally Stamp SP em http://localhost:${port}`));
+  criarApp(pool).listen(port, () => console.log(`Unofficial Stamp Rally em http://localhost:${port}`));
 })().catch((err) => {
   console.error(err);
   process.exit(1);

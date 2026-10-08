@@ -15,8 +15,8 @@ async function enviarCodigo(email, codigo) {
       from: process.env.EMAIL_FROM,
       to: [email],
       subject: `Seu código: ${codigo}`,
-      text: `Seu código para entrar no Rally Stamp SP é ${codigo}.\n\nEle vale por 10 minutos. Se não foi você, ignore este e-mail.\n\nRally Stamp SP é um projeto de fãs, não-oficial.`,
-      html: `<p>Seu código para entrar no <b>Rally Stamp SP</b> é:</p><p style="font-size:28px;letter-spacing:6px;font-weight:bold">${codigo}</p><p>Ele vale por 10 minutos. Se não foi você, ignore este e-mail.</p><p style="color:#777;font-size:12px">Rally Stamp SP é um projeto de fãs, não-oficial.</p>`,
+      text: `Seu código para entrar no Unofficial Stamp Rally é ${codigo}.\n\nEle vale por 10 minutos. Se não foi você, ignore este e-mail.\n\nUnofficial Stamp Rally é um projeto de fãs, não-oficial.`,
+      html: `<p>Seu código para entrar no <b>Unofficial Stamp Rally</b> é:</p><p style="font-size:28px;letter-spacing:6px;font-weight:bold">${codigo}</p><p>Ele vale por 10 minutos. Se não foi você, ignore este e-mail.</p><p style="color:#777;font-size:12px">Unofficial Stamp Rally é um projeto de fãs, não-oficial.</p>`,
     }),
   });
   if (!resp.ok) throw new Error(`Falha ao enviar e-mail (${resp.status}): ${await resp.text()}`);

@@ -24,6 +24,12 @@ function marcarMenu(secao) {
   });
 }
 
+/** "Informações" fica ativo quando a seção passa do meio da tela. */
+function atualizarMenu() {
+  const info = $('#informacoes');
+  marcarMenu(info.getBoundingClientRect().top < window.innerHeight / 2 ? 'informacoes' : 'mapa');
+}
+
 function irPara(secao) {
   if (secao === 'mapa') window.scrollTo({ top: 0 });
   else $(`#${secao}`).scrollIntoView({ block: 'start' });
@@ -43,11 +49,9 @@ function iniciarMenu() {
       irPara(a.dataset.secao);
     });
   });
-  // O item do menu acompanha a rolagem: "Informações" fica ativo quando a seção passa do meio da tela.
-  const info = $('#informacoes');
-  const atualizar = () => marcarMenu(info.getBoundingClientRect().top < window.innerHeight / 2 ? 'informacoes' : 'mapa');
-  window.addEventListener('scroll', atualizar, { passive: true });
-  atualizar();
+  // O item do menu acompanha a rolagem e as mudanças de altura da página (a cartela carrega depois).
+  window.addEventListener('scroll', atualizarMenu, { passive: true });
+  new ResizeObserver(atualizarMenu).observe($('main'));
 }
 
 /* ---------- Cartela ---------- */

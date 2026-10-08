@@ -1,6 +1,6 @@
-# Rally Stamp SP — identidade visual
+# Unofficial Stamp Rally — identidade visual
 
-Rally Stamp SP é um rally de carimbos feito por fã, para fã: durante as datas de shows do BTS em São Paulo, quem está na cidade visita pontos ligados a projetos de fãs e coleciona carimbos pelo caminho, mergulhando mais na cultura asiática em volta do K-pop. É um projeto não-oficial — não tem qualquer vínculo com a HYBE, com o BTS ou com a organização da turnê, e essa distância precisa ficar visível na marca, não só no texto do rodapé.
+Unofficial Stamp Rally é um rally de carimbos feito por fã, para fã: durante as datas de shows do BTS em São Paulo, quem está na cidade visita pontos ligados a projetos de fãs e coleciona carimbos pelo caminho, mergulhando mais na cultura asiática em volta do K-pop. É um projeto não-oficial — não tem qualquer vínculo com a HYBE, com o BTS ou com a organização da turnê, e essa distância precisa ficar visível na marca, não só no texto do rodapé.
 
 ## Para quem estamos desenhando
 

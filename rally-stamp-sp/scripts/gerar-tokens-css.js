@@ -1,4 +1,4 @@
-// Gera public/css/tokens.css a partir de design-system/tokens.json (cópia do design system "Rally Stamp SP").
+// Gera public/css/tokens.css a partir de design-system/tokens.json (cópia do design system "Unofficial Stamp Rally").
 // Rode `npm run tokens` depois de atualizar o tokens.json.
 const fs = require('node:fs');
 const path = require('node:path');

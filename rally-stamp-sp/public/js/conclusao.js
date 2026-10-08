@@ -91,7 +91,7 @@ async function desenharCartao(locais, participante) {
     ctx.fillText(`carimbado por ${participante.nome}`, W / 2, 1200);
   }
   ctx.font = '72px "Do Hyeon"';
-  ctx.fillText('Rally Stamp SP', W / 2, 1282);
+  ctx.fillText('Unofficial Stamp Rally', W / 2, 1282);
   ctx.font = '500 28px "Baloo 2"';
   ctx.fillStyle = cor('ink-600');
   ctx.fillText('projeto de fã · não-oficial', W / 2, 1322);
@@ -108,16 +108,16 @@ export async function mostrarConclusao(locais, participante) {
     <div class="centro"><div class="girando" aria-hidden="true"></div></div>`);
   const blob = await desenharCartao(locais, participante);
   const url = URL.createObjectURL(blob);
-  const arquivo = new File([blob], 'rally-stamp-sp.png', { type: 'image/png' });
+  const arquivo = new File([blob], 'unofficial-stamp-rally.png', { type: 'image/png' });
   const podeCompartilhar = navigator.canShare?.({ files: [arquivo] });
   el.lastElementChild.outerHTML = `
-    <img class="cartao-final" src="${url}" alt="Cartela completa do Rally Stamp SP${participante?.nome ? ` de ${esc(participante.nome)}` : ''}">
+    <img class="cartao-final" src="${url}" alt="Cartela completa do Unofficial Stamp Rally${participante?.nome ? ` de ${esc(participante.nome)}` : ''}">
     <div class="acoes">
       ${podeCompartilhar ? '<button class="btn btn-primario btn-bloco" data-acao="compartilhar">Compartilhar</button>' : ''}
-      <a class="btn ${podeCompartilhar ? 'btn-contorno' : 'btn-primario'} btn-bloco" href="${url}" download="rally-stamp-sp.png">Baixar imagem</a>
+      <a class="btn ${podeCompartilhar ? 'btn-contorno' : 'btn-primario'} btn-bloco" href="${url}" download="unofficial-stamp-rally.png">Baixar imagem</a>
     </div>`;
   const btn = $('[data-acao="compartilhar"]', el);
   if (btn) {
-    btn.onclick = () => navigator.share({ files: [arquivo], text: 'Completei o Rally Stamp SP!' }).catch(() => {});
+    btn.onclick = () => navigator.share({ files: [arquivo], text: 'Completei o Unofficial Stamp Rally!' }).catch(() => {});
   }
 }

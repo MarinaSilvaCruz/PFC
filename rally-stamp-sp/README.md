@@ -1,10 +1,10 @@
-# Rally Stamp SP (v2)
+# Unofficial Stamp Rally (v2)
 
 Rally de carimbos **não-oficial, feito por fãs**, pelas ruas de São Paulo. A especificação completa está em [`../SPEC.md`](../SPEC.md).
 
 - **Backend:** Node.js 20+ · Express 5 · Postgres
 - **Frontend:** HTML/CSS/JS puro (módulos ES), mobile first
-- **Visual:** design system "Rally Stamp SP" ([artifact](https://claude.ai/artifact/3gYmkqzHJuhHaXsj8nboHm)). A cópia dos tokens fica em `design-system/tokens.json`, e `public/css/tokens.css` é gerado a partir dela (`npm run tokens`). Os componentes em `public/css/app.css` usam só esses tokens.
+- **Visual:** design system "Unofficial Stamp Rally" ([artifact](https://claude.ai/artifact/3gYmkqzHJuhHaXsj8nboHm)). A cópia dos tokens fica em `design-system/tokens.json`, e `public/css/tokens.css` é gerado a partir dela (`npm run tokens`). Os componentes em `public/css/app.css` usam só esses tokens.
 
 ## Rodar localmente
 
