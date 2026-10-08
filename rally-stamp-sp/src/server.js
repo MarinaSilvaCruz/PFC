@@ -3,6 +3,10 @@ const { criarApp } = require('./app');
 const { semearLocais } = require('./seed');
 
 function conferirConfiguracao() {
+  // Sem PUBLIC_URL, usa o endereço que o Railway gera para o serviço (…up.railway.app).
+  if (!process.env.PUBLIC_URL && process.env.RAILWAY_PUBLIC_DOMAIN) {
+    process.env.PUBLIC_URL = `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
+  }
   if (process.env.NODE_ENV !== 'production') return;
   const faltando = ['DATABASE_URL', 'CODE_SECRET', 'ADMIN_TOKEN', 'PUBLIC_URL'].filter((v) => !process.env[v]);
   if (faltando.length) throw new Error(`Variáveis obrigatórias em produção não definidas: ${faltando.join(', ')}`);

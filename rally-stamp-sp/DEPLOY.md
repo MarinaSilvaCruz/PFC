@@ -30,15 +30,14 @@ No serviço do site, aba **Variables**, adicione:
 | `NODE_ENV` | `production` |
 | `ADMIN_TOKEN` | uma senha longa e aleatória (é a senha do `/admin`) |
 | `CODE_SECRET` | outra senha longa e aleatória, diferente da anterior |
-| `PUBLIC_URL` | o endereço provisório (passo 1.3), por exemplo `https://unofficial-stamp-rally.up.railway.app` |
+| `PUBLIC_URL` | pode ficar vazio por enquanto: o site usa sozinho o endereço gerado no passo 1.3. Preencha na Fase 3, com o domínio definitivo. |
 | `SINCRONIZAR_LOCAIS` | `true` enquanto os locais forem mantidos no arquivo `data/locais.json` |
 
 Senhas aleatórias: o Railway tem um botão para gerar valores na tela de variáveis; ou rode `openssl rand -base64 32` num terminal.
 
 ### 1.3 Endereço provisório
 
-Em **Settings → Networking → Generate Domain**. O Railway cria um endereço `https://….up.railway.app`.
-Copie esse endereço para a variável `PUBLIC_URL` (sem barra no final). O Railway refaz o deploy sozinho.
+Em **Settings → Networking → Generate Domain**. O Railway cria um endereço `https://….up.railway.app`, e o site passa a usá-lo sozinho (inclusive dentro dos QR codes). Se o deploy tiver falhado antes disso, clique em **Redeploy** depois de gerar o endereço.
 
 ### 1.4 Conferir
 
