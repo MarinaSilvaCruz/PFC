@@ -12,7 +12,7 @@ A referência não é o show, é a viagem: papelaria coreana, carimbo de passapo
 
 Três decisões deliberadas para não colidir com a identidade oficial:
 
-1. **Sem roxo.** O roxo é a cor mais associada ao fandom oficial (o "ARMY Bomb", a identidade da turnê). Toda a paleta abaixo evita a família roxo/violeta de propósito — vamos de coral, menta e azul-céu.
+1. **Sem roxo, com uma exceção.** O roxo é a cor mais associada ao fandom oficial (o "ARMY Bomb", a identidade da turnê). A interface evita a família roxo/violeta de propósito — vamos de coral, menta e azul-céu. A única exceção são os **fan projects** (ações feitas por fãs): neles o roxo marca justamente o que vem da ARMY, sempre junto do selo de coração (veja *Fan projects* abaixo). Fora disso, nada de roxo.
 2. **Sem tipografia ou logotipo oficial.** Nenhuma fonte, lettering ou símbolo que imite a marca do grupo, da turnê ou da HYBE. As fontes escolhidas abaixo têm personalidade coreana (duas delas são, literalmente, fontes de origem coreana), mas nenhuma reproduz uma marca existente.
 3. **Sem rosto, sem nome de membro, sem logo do grupo.** A identidade celebra a cultura em volta do fandom — comida, papelaria, trilhas pela cidade — não a imagem dos artistas.
 
@@ -20,7 +20,7 @@ Três decisões deliberadas para não colidir com a identidade oficial:
 
 ## Cores
 
-Paleta clara (tema `claro`), sem nenhum tom de roxo/violeta. Cada cor tem uma versão "decorativa" (uso em ilustrações e preenchimentos grandes) e uma versão "funcional" (texto, ícone, botão — testada para contraste de leitura).
+Paleta clara (tema `claro`). Roxo só nos fan projects (`purple-*`). Cada cor tem uma versão "decorativa" (uso em ilustrações e preenchimentos grandes) e uma versão "funcional" (texto, ícone, botão — testada para contraste de leitura).
 
 | Papel | Token | Uso |
 |---|---|---|
@@ -34,8 +34,9 @@ Paleta clara (tema `claro`), sem nenhum tom de roxo/violeta. Cada cor tem uma ve
 | Acento informativo | `sky-600` (funcional) / `sky-500` (decorativo) | Links, avisos, botão terciário. |
 | Acento de conquista | `yellow-500` | Selo de conquista, confete — sempre com `ink-900` por cima. |
 | Carimbo validado | `stamp-red-600` (funcional) / `stamp-red-500` (decorativo) | Estado "carimbado", ícone de check, cor de tinta do selo. |
+| Fan project | `purple-600` (funcional) / `purple-500` (decorativo) | Só em paradas do tipo fan project: anel e cadeado do selo, tinta do carimbo, selo de coração, chip de tipo. |
 
-Regra simples para não errar: se a cor carrega texto ou precisa ser lida rápido (botão, link, ícone pequeno), use a versão `-600`. Se é só decoração (ilustração, fundo de sticker, confete), use a `-500`. As versões `-100` (`coral-100`, `mint-100`, `sky-100`, `yellow-100`, `stamp-red-100`) são só fundo de badge, sempre com texto `ink-900` por cima. `border-sand` é a linha pontilhada decorativa (trilha no mapa, divisória) — não serve como borda de campo; para isso existe `border-control`, e o foco de teclado usa sempre `focus-ring`.
+Regra simples para não errar: se a cor carrega texto ou precisa ser lida rápido (botão, link, ícone pequeno), use a versão `-600`. Se é só decoração (ilustração, fundo de sticker, confete), use a `-500`. As versões `-100` (`coral-100`, `mint-100`, `sky-100`, `yellow-100`, `stamp-red-100`, `purple-100`) são só fundo de badge, sempre com texto `ink-900` por cima. `border-sand` é a linha pontilhada decorativa (trilha no mapa, divisória) — não serve como borda de campo; para isso existe `border-control`, e o foco de teclado usa sempre `focus-ring`.
 
 ## Tipografia
 
@@ -62,6 +63,14 @@ A metáfora central do produto é o carimbo de viagem, então o sistema gráfico
 - **Washi tape e canto de polaroid**: cantos levemente inclinados ou uma faixa colorida fina no topo de um card, como se fosse fita decorativa colando aquele "carimbo" na página — efeito sutil, não literal (sem textura de fita colada escaneada).
 - **Confete e stickers**: pontinhos e formas soltas em `coral-500`/`mint-500`/`yellow-500` para celebrar uma conquista, sempre com moderação — o excesso quebra a leitura.
 
+### Fan projects: roxo + selo de coração
+
+O rally mistura dois tipos de parada na mesma cartela: **lojas** do universo coreano e **fan projects** (exposições, murais, cafés temáticos organizados por fãs). A diferença aparece em duas camadas, para nunca depender só da cor:
+
+- **Cor:** lojas usam menta (`mint-600` no anel e no cadeado, `mint-100` de fundo); fan projects usam roxo (`purple-600` no anel e no cadeado, `purple-100` de fundo). O carimbo coletado de loja sai em `stamp-red-600` com "RALLY SP"; o de fan project sai em `purple-600` com "FAN PROJ".
+- **Selo de coração:** um círculo de 26px em `purple-600`, com coração branco e borda `surface-0` de 2px, preso no canto superior direito do selo de todo fan project, em todos os estados (inclusive o cinza de quem ainda não entrou). Lojas não levam selo.
+- **Legenda e chip:** a cartela mostra a legenda "Lojas · Fan projects", e o card do local leva um chip de tipo (`mint-100` ou `purple-100`, com o coração em `purple-600` no de fan project).
+
 Evitar: gradiente roxo-azul (clichê genérico de "app de IA"), emoji dentro de card como ícone, cards com borda lateral colorida grossa, qualquer forma de escudo/brasão que pareça logotipo oficial de grupo.
 
 ## Tom de voz
@@ -76,4 +85,4 @@ Evitar linguagem corporativa ("acesse o módulo", "realize o cadastro") e evitar
 
 ## Próximos passos
 
-Esta primeira versão cobre cor, tipografia, espaçamento e raio — a base para qualquer tela do site. Ainda não há um logotipo definido (o nome em `display-lg` funciona como marca provisória) nem componentes de interface prontos (botão, badge de carimbo, card de parada). Podemos construir esses componentes em seguida, já em cima destes tokens.
+Esta versão cobre cor (incluindo o roxo dos fan projects), tipografia, espaçamento e raio — a base para qualquer tela do site. Ainda não há um logotipo definido (o nome em `display-lg` funciona como marca provisória) nem componentes de interface prontos (botão, badge de carimbo, card de parada). Podemos construir esses componentes em seguida, já em cima destes tokens.
