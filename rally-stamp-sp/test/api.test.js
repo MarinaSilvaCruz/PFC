@@ -103,3 +103,19 @@ test('escritas da API exigem JSON', { skip: pular }, async () => {
   const r = await fetch(`${base}/api/auth/entrar`, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: 'email=a@b.com' });
   assert.equal(r.status, 415);
 });
+
+test('sincronizar locais mantém o token e desativa os que saíram do arquivo', { skip: pular }, async () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const os = require('node:os');
+  const { semearLocais } = require('../src/seed');
+  const antes = (await pool.query("SELECT token FROM locais WHERE slug = 'liberdade'")).rows[0].token;
+  const fixture = JSON.parse(fs.readFileSync(path.join(__dirname, 'locais.fixture.json'), 'utf8'));
+  const arquivo = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'locais-')), 'locais.json');
+  fs.writeFileSync(arquivo, JSON.stringify(fixture.filter((l) => l.slug !== 'morumbi').map((l) => ({ ...l, raio_m: 99 }))));
+
+  await semearLocais(pool, arquivo, { desativarAusentes: true });
+  const { rows } = await pool.query("SELECT slug, token, ativo, raio_m FROM locais WHERE slug IN ('liberdade', 'morumbi') ORDER BY slug");
+  assert.deepEqual(rows.map((r) => [r.slug, r.ativo, r.raio_m]), [['liberdade', true, 99], ['morumbi', false, 300]]);
+  assert.equal(rows[0].token, antes);
+});

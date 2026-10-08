@@ -58,6 +58,6 @@ TEST_DATABASE_URL=postgres://.../rally_test npm test   # + testes de API (APAGA 
 
 ## Deploy
 
-Precisa de um processo Node sempre ligado + Postgres (Railway ou Render pagos evitam o "cold start" no dia do show). Variáveis: as do `.env.example`, com `NODE_ENV=production` (cookie `Secure`), `DATABASE_SSL=true` se o provedor pedir, `PUBLIC_URL` com o domínio final **antes de imprimir os QRs**, e uma `RESEND_API_KEY` com domínio verificado em `EMAIL_FROM`.
+Passo a passo completo em [`DEPLOY.md`](DEPLOY.md) (Railway + Resend, com o domínio por último).
 
 Os dados dos participantes são pessoais (LGPD): o `.env` e exports CSV estão no `.gitignore`; nunca versione o banco.
