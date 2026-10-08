@@ -218,6 +218,8 @@ main { max-width: 480px; margin: 0 auto; padding: var(--space-12) var(--space-8)
 .foto-qr { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius-sm); background: var(--surface-100); display: block; }
 .polaroid { background: var(--surface-0); padding: var(--space-4) var(--space-4) var(--space-8); box-shadow: 0 6px 20px -10px rgba(28, 35, 64, .45); transform: rotate(1.5deg); }
 .polaroid figcaption { margin-top: var(--space-4); text-align: center; }
+.foto-provisoria { position: relative; }
+.foto-provisoria .chip { position: absolute; left: var(--space-4); bottom: var(--space-4); }
 .foto-vazia { display: grid; place-items: center; text-align: center; color: var(--ink-600); padding: var(--space-8); }
 .endereco { display: flex; gap: var(--space-4); align-items: flex-start; }
 .endereco svg { flex: none; color: var(--coral-600); margin-top: 2px; }

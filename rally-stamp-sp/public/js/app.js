@@ -8,6 +8,9 @@ import { mostrarConclusao } from './conclusao.js';
 const estado = { participante: null, locais: [], aposLogin: null };
 const CHAVE_PENDENTE = 'rally:checkin-pendente';
 
+/** Usada enquanto o local não tem a foto real de onde o QR fica. */
+const FOTO_PROVISORIA = '/img/foto-placeholder.svg';
+
 const giro = (i) => `${((i * 37) % 17) - 8}deg`;
 const ehFan = (l) => l.tipo === 'fan_project';
 const NOME_TIPO = { loja: 'Loja', fan_project: 'Fan project' };
@@ -133,7 +136,10 @@ function abrirLocal(slug) {
   const q = encodeURIComponent(l.endereco || l.nome);
   const foto = l.foto_qr_url
     ? `<img class="foto-qr" src="${esc(l.foto_qr_url)}" alt="Onde o QR fica em ${esc(l.nome)}" loading="lazy">`
-    : '<div class="foto-qr foto-vazia body-md">A foto de onde o QR está fixado aparece aqui em breve.</div>';
+    : `<div class="foto-provisoria">
+        <img class="foto-qr" src="${FOTO_PROVISORIA}" alt="Ilustração provisória. A foto de onde o QR fica em ${esc(l.nome)} chega em breve.">
+        <span class="chip chip-amarelo caption">foto ilustrativa</span>
+      </div>`;
   const el = abrirFolha(`
     <div class="folha-topo">
       <div class="chips">

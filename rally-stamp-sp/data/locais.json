@@ -90,33 +90,18 @@
     "_obs": "coordenadas aproximadas: confirmar"
   },
   {
-    "slug": "jimtober",
-    "ordem": 7,
-    "tipo": "fan_project",
-    "nome": "Jimtober",
-    "bairro": "Morumbi",
-    "endereco": "Av. Giovanni Gronchi, 1530 - Morumbi, São Paulo - SP",
-    "descricao": "Painel publicitário com mensagens para celebrar o aniversário do Jimin.",
-    "horario": "",
-    "foto_qr_url": "",
-    "lat": -23.604,
-    "lng": -46.7243,
-    "raio_m": 200,
-    "_obs": "coordenadas aproximadas: confirmar"
-  },
-  {
     "slug": "hope-in-motion",
-    "ordem": 8,
+    "ordem": 7,
     "tipo": "fan_project",
     "nome": "Hope in Motion",
     "bairro": "Morumbi",
-    "endereco": "Estádio do Morumbis (local exato a definir) - Morumbi, São Paulo - SP",
+    "endereco": "Av. Jules Rimet, 315 - Morumbi, São Paulo - SP",
     "descricao": "Mural grafitado em homenagem ao J-hope.",
     "horario": "Apresentações de break dance em datas selecionadas",
     "foto_qr_url": "",
-    "lat": -23.6,
-    "lng": -46.7203,
-    "raio_m": 300,
+    "lat": -23.5993,
+    "lng": -46.7213,
+    "raio_m": 150,
     "_obs": "coordenadas aproximadas: confirmar"
   }
 ]
