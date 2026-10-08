@@ -78,7 +78,6 @@ Faça esta fase **antes de imprimir os QR codes**, porque o endereço do site va
 
 - [ ] Coordenadas exatas de todos os locais (hoje marcadas com `"_obs": "coordenadas aproximadas: confirmar"` em `data/locais.json`)
 - [ ] Foto de onde cada QR fica (`foto_qr_url`)
-- [ ] Instagram de contato (hoje `[PLACEHOLDER]` em `public/index.html`)
 - [ ] Texto de privacidade revisado
 - [ ] Teste em campo num iPhone (Safari) e num Android (Chrome): localização, câmera e carimbo
 - [ ] QR codes impressos com o domínio definitivo

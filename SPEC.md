@@ -187,7 +187,7 @@ Como o tráfego se concentra nos dias de show, **evitar o cold start** no moment
 | 1 | Nome no cadastro | **Sim, opcional.** |
 | 2 | Login | **Código de 6 dígitos por e-mail** (verificar o e-mail também no cadastro). |
 | 3 | Ordem dos locais | **Livre**: qualquer ordem. A trilha é só visual. |
-| 4 | Aba Informações | Regras/como funciona, aviso de não-oficialidade, FAQ + contato, privacidade (LGPD) + botão **Sair**. |
+| 4 | Aba Informações | Regras/como funciona, aviso de não-oficialidade, FAQ + contato, privacidade (LGPD) + botão **Sair**. Sem Instagram: o canal para pedidos sobre os dados é o e-mail da Marina, no texto de privacidade. |
 | 5 | Ao completar | **Tela de conclusão compartilhável** (cartela completa, pronta para print/stories). |
 | 6 | Lista real de locais | Ainda pendente: seguir com placeholders. |
 | 7 | Hospedagem | **Decidir depois.** Código portátil (Node + Postgres, configurado por `.env`). |
