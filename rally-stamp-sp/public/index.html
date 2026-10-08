@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#FFF8EF">
+  <title>Unofficial Stamp Rally</title>
+  <meta name="description" content="Rally de carimbos não-oficial, feito por fãs, pelas ruas de São Paulo.">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Do+Hyeon&family=Nanum+Pen+Script&display=swap">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/app.css">
+  <script type="module" src="/js/app.js"></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="tinta" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="ruido"/>
+        <feDisplacementMap in="SourceGraphic" in2="ruido" scale="2.2"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <header class="topo">
+    <div class="topo-marca">
+      <span class="marca display-sm">Unofficial Stamp Rally</span>
+      <span class="chip chip-amarelo caption">de fã para fã</span>
+    </div>
+    <nav class="abas" aria-label="Seções da página">
+      <a class="aba heading-sm" href="#mapa" data-secao="mapa" aria-current="true">Mapa</a>
+      <a class="aba heading-sm" href="#informacoes" data-secao="informacoes">Informações</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="mapa" class="painel secao" aria-labelledby="titulo-mapa">
+      <div class="mapa-cabecalho">
+        <h1 class="heading-lg" id="titulo-mapa">Seu passaporte de fã</h1>
+        <p class="body-md">O roteiro de ARMY para ARMY pelos dias de show do BTS em São Paulo.</p>
+        <p class="body-md texto-2" id="mapa-instrucao">Toque num carimbo para ver a missão.</p>
+        <ul class="legenda caption" id="legenda" aria-label="Tipos de parada" hidden>
+          <li><span class="legenda-bola legenda-loja" aria-hidden="true"></span>Lojas, cafés e cultura</li>
+          <li><span class="legenda-bola legenda-fan" aria-hidden="true"><svg viewBox="0 0 24 24" width="10" height="10"><path d="M12 21s-7.5-4.6-9.4-9.3C1.3 8.4 3.3 5 6.7 5c2 0 3.6 1.1 4.3 2.6h2C13.7 6.1 15.3 5 17.3 5c3.4 0 5.4 3.4 4.1 6.7C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></span>Fan projects</li>
+        </ul>
+        <div class="progresso" id="progresso" hidden>
+          <div class="progresso-barra" role="progressbar" aria-valuemin="0" id="progresso-barra"><span></span></div>
+          <span class="caption" id="progresso-texto"></span>
+        </div>
+      </div>
+
+      <button class="faixa-completo" id="faixa-completo" hidden>
+        <span class="heading-sm">Passaporte completo!</span>
+        <span class="body-md">Ver e compartilhar minha cartela</span>
+      </button>
+
+      <div class="cartela" id="cartela">
+        <span class="washi" aria-hidden="true"></span>
+        <div class="cartela-trilha" id="trilha" aria-hidden="true"></div>
+        <ol class="cartela-grade" id="grade" aria-label="Locais do rally"></ol>
+        <p class="cartela-carregando body-md texto-2" id="cartela-status">Carregando os locais…</p>
+      </div>
+
+      <a class="ir-info" href="#informacoes" data-secao="informacoes">
+        <span class="heading-sm">O que é o Unofficial Stamp Rally?</span>
+        <span class="body-md texto-2">Entenda o rally e como carimbar</span>
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <section id="informacoes" class="painel secao" aria-labelledby="titulo-info">
+      <div class="intro">
+        <span class="chip chip-coral caption">Feito por ARMY, para ARMY</span>
+        <h2 class="display-sm" id="titulo-info">Seu roteiro de fã pelos dias de show</h2>
+        <p class="body-lg">O BTS vem para São Paulo, e a cidade inteira entra no clima. Entre um show e outro tem muita coisa acontecendo: fan projects montados com carinho por outras ARMYs, cafés com cardápio temático e lojinhas de K-pop e cultura asiática cheias de lembrancinhas para levar para casa.</p>
+        <p class="body-lg">O Unofficial Stamp Rally junta tudo isso num lugar só. Cada parada vale um carimbo no seu passaporte de fã: você chega, lê o QR do ponto e o selo aparece na hora. Com a cartela completa, você ganha uma imagem para guardar de lembrança e mostrar por aí.</p>
+        <p class="body-lg">Veio de longe ou mora logo ali? Tanto faz. Esse é o mapa para você não perder nada do que a fandom preparou.</p>
+      </div>
+
+      <ul class="tipos" aria-label="O que você encontra no caminho">
+        <li class="tipo tipo-loja">
+          <span class="tipo-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 8h14l-1 12H6L5 8zM9 8V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg></span>
+          <p class="heading-sm">Lojas, cafés e cultura</p>
+          <p class="body-md">Cafés, lojinhas e espaços de K-pop e cultura asiática para fazer uma pausa, provar alguma coisa nova, garimpar lembrancinhas e conhecer mais da cultura.</p>
+        </li>
+        <li class="tipo tipo-fan">
+          <span class="tipo-icone" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 21s-7.5-4.6-9.4-9.3C1.3 8.4 3.3 5 6.7 5c2 0 3.6 1.1 4.3 2.6h2C13.7 6.1 15.3 5 17.3 5c3.4 0 5.4 3.4 4.1 6.7C19.5 16.4 12 21 12 21z" fill="currentColor"/></svg></span>
+          <p class="heading-sm">Fan projects</p>
+          <p class="body-md">Exposições, murais e celebrações organizados por fãs. Na cartela, eles aparecem em roxo, com coração.</p>
+        </li>
+      </ul>
+
+      <div class="aviso-fa">
+        <p class="heading-sm">Projeto de fã, não-oficial</p>
+        <p class="body-md">O Unofficial Stamp Rally é feito por fãs, para fãs. Não tem nenhum vínculo com a HYBE, com o BTS, com a gravadora ou com a organização da turnê.</p>
+      </div>
+
+      <details class="sanfona" open>
+        <summary class="heading-sm">Como funciona</summary>
+        <ol class="passos body-md">
+          <li>Crie sua conta (leva um minuto).</li>
+          <li>Escolha um ponto na cartela e veja o endereço e a foto de onde o QR está.</li>
+          <li>Chegando lá, toque em <b>Estou aqui</b>, permita a localização e aponte a câmera para o QR.</li>
+          <li>Pronto: o carimbo aparece no seu passaporte. Os pontos podem ser visitados em qualquer ordem e em qualquer horário.</li>
+        </ol>
+        <p class="body-md texto-2">Cada ponto vale um carimbo por pessoa. É preciso estar no local: a gente confere a sua localização na hora.</p>
+      </details>
+
+      <details class="sanfona">
+        <summary class="heading-sm">Perguntas frequentes</summary>
+        <dl class="faq body-md">
+          <dt>O QR não lê. E agora?</dt>
+          <dd>Limpe a lente, chegue um pouco mais perto e evite reflexo. Se ainda assim não ler, aponte a câmera normal do celular para o QR: ele abre o site direto no ponto certo.</dd>
+          <dt>Diz que eu não estou no local, mas estou.</dt>
+          <dd>Ligue o GPS (localização precisa), espere alguns segundos ao ar livre e tente de novo. Dentro de prédios o sinal costuma ser pior.</dd>
+          <dt>Troquei de celular. Perdi meus carimbos?</dt>
+          <dd>Não. O progresso fica na sua conta. Use “Já tenho conta” e entre com o código que chega no seu e-mail.</dd>
+          <dt>A câmera não abre.</dt>
+          <dd>Confira se o navegador tem permissão para usar a câmera nos ajustes do celular e recarregue a página.</dd>
+        </dl>
+      </details>
+
+
+      <details class="sanfona" id="sanfona-privacidade">
+        <summary class="heading-sm">Privacidade</summary>
+        <div class="body-md" data-texto-privacidade></div>
+      </details>
+
+      <div class="conta" id="conta" hidden>
+        <p class="body-md texto-2">Você entrou como <b id="conta-email"></b>.</p>
+        <button class="btn btn-contorno" id="btn-sair">Sair</button>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="folha" id="folha" aria-labelledby="folha-titulo">
+    <button class="folha-fechar" id="folha-fechar" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="folha-conteudo" id="folha-conteudo"></div>
+  </dialog>
+
+  <div class="toast body-md" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <template id="tpl-privacidade">
+    <p>Para participar, guardamos o e-mail, o telefone, a cidade, o estado e, se você informar, o nome e o Instagram. Também guardamos quando e onde (localização aproximada) cada carimbo foi feito, só para validar a visita.</p>
+    <p>Usamos esses dados para fazer o rally funcionar e para falar com você sobre ele. Não vendemos nem compartilhamos seus dados com terceiros.</p>
+    <p>Você pode pedir para ver, corrigir ou apagar seus dados a qualquer momento pelo e-mail <a href="mailto:marinasilvacruz@gmail.com">marinasilvacruz@gmail.com</a>.</p>
+  </template>
+</body>
+</html>
