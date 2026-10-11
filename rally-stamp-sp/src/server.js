@@ -19,11 +19,12 @@ function conferirConfiguracao() {
 
   // SINCRONIZAR_LOCAIS=true faz de data/locais.json a fonte da verdade a cada deploy:
   // atualiza os locais pelo slug (mantendo o token dos QRs) e desativa os que saíram do arquivo.
-  const { rows } = await pool.query('SELECT count(*)::int AS n FROM locais');
+  // Sem ela, só os locais novos do arquivo entram; os que já existem (e edições do /admin) ficam como estão.
   if (process.env.SINCRONIZAR_LOCAIS === 'true') {
     console.log(`${await semearLocais(pool, undefined, { desativarAusentes: true })} locais sincronizados de data/locais.json.`);
-  } else if (rows[0].n === 0) {
-    console.log(`Banco sem locais: ${await semearLocais(pool)} locais importados de data/locais.json.`);
+  } else {
+    const novos = await semearLocais(pool, undefined, { apenasNovos: true });
+    if (novos) console.log(`${novos} locais novos importados de data/locais.json.`);
   }
   if (!process.env.RESEND_API_KEY) console.warn('RESEND_API_KEY ausente: os códigos de login serão impressos no log.');
 

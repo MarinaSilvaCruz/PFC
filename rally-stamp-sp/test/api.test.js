@@ -133,3 +133,19 @@ test('sincronizar locais mantém o token e desativa os que saíram do arquivo', 
   assert.deepEqual(rows.map((r) => [r.slug, r.ativo, r.raio_m]), [['liberdade', true, 99], ['morumbi', false, 300]]);
   assert.equal(rows[0].token, antes);
 });
+
+test('sem sincronizar, só os locais novos do arquivo entram', { skip: pular }, async () => {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const os = require('node:os');
+  const { semearLocais } = require('../src/seed');
+  await pool.query("UPDATE locais SET nome = 'Editado no admin' WHERE slug = 'liberdade'");
+  const fixture = JSON.parse(fs.readFileSync(path.join(__dirname, 'locais.fixture.json'), 'utf8'));
+  const novo = { ...fixture[0], slug: 'local-novo', nome: 'Local novo' };
+  const arquivo = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'locais-')), 'locais.json');
+  fs.writeFileSync(arquivo, JSON.stringify([...fixture, novo]));
+
+  assert.equal(await semearLocais(pool, arquivo, { apenasNovos: true }), 1);
+  const { rows } = await pool.query("SELECT slug, nome FROM locais WHERE slug IN ('liberdade', 'local-novo') ORDER BY slug");
+  assert.deepEqual(rows.map((r) => r.nome), ['Editado no admin', 'Local novo']);
+});
