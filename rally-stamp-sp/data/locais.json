@@ -45,8 +45,23 @@
     "_obs": "coordenadas aproximadas: confirmar"
   },
   {
-    "slug": "emporio-azuki",
+    "slug": "love-yourself-light-moment",
     "ordem": 4,
+    "tipo": "fan_project",
+    "nome": "Love Yourself - Light Moment",
+    "bairro": "Centro",
+    "endereco": "Shopping Light - R. Cel. Xavier de Toledo, 23 - Centro, São Paulo - SP",
+    "descricao": "",
+    "horario": "Dia 29/10, a partir das 15h",
+    "foto_qr_url": "",
+    "lat": -23.5458,
+    "lng": -46.6386,
+    "raio_m": 150,
+    "_obs": "coordenadas aproximadas: confirmar"
+  },
+  {
+    "slug": "emporio-azuki",
+    "ordem": 5,
     "tipo": "loja",
     "nome": "Empório Azuki",
     "bairro": "Liberdade",
@@ -61,7 +76,7 @@
   },
   {
     "slug": "we-coffee",
-    "ordem": 5,
+    "ordem": 6,
     "tipo": "loja",
     "nome": "We Coffee",
     "bairro": "Liberdade",
@@ -76,7 +91,7 @@
   },
   {
     "slug": "jarina-k-pop",
-    "ordem": 6,
+    "ordem": 7,
     "tipo": "loja",
     "nome": "Jarina K-pop",
     "bairro": "Liberdade",
@@ -91,7 +106,7 @@
   },
   {
     "slug": "centro-cultural-coreano",
-    "ordem": 7,
+    "ordem": 8,
     "tipo": "loja",
     "nome": "Centro Cultural Coreano",
     "bairro": "Bela Vista",
@@ -106,7 +121,7 @@
   },
   {
     "slug": "korea-mart",
-    "ordem": 8,
+    "ordem": 9,
     "tipo": "loja",
     "nome": "Korea Mart",
     "bairro": "Liberdade",

@@ -115,9 +115,7 @@ function renderCartela() {
   barra.setAttribute('aria-label', `${coletados} de ${total} carimbos`);
   $('span', barra).style.width = `${total ? (coletados / total) * 100 : 0}%`;
   $('#faixa-completo').hidden = !completo();
-  $('#mapa-instrucao').textContent = completo()
-    ? 'Todos os carimbos coletados. Que jornada!'
-    : 'Toque num carimbo para ver a missão.';
+  $('#mapa-instrucao').hidden = !completo();
 
   const conta = $('#conta');
   conta.hidden = !estado.participante;

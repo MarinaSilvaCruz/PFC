@@ -43,12 +43,6 @@ a { color: var(--sky-600); text-underline-offset: 3px; }
 html { scroll-behavior: smooth; }
 .secao { scroll-margin-top: var(--altura-topo, 112px); }
 .secao + .secao { margin-top: var(--space-24); padding-top: var(--space-16); border-top: 2px dashed var(--border-sand); }
-.ir-info {
-  display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: var(--space-8);
-  padding: var(--space-8); border-radius: var(--radius-md); background: var(--surface-100);
-  color: var(--ink-900); text-decoration: none;
-}
-.ir-info svg { grid-column: 2; grid-row: 1 / span 2; color: var(--coral-600); }
 .intro > * + * { margin-top: var(--space-8); }
 .intro h2 { text-wrap: balance; }
 .chip-coral { background: var(--coral-100); }
