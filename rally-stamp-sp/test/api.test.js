@@ -47,8 +47,6 @@ function cliente() {
   };
 }
 
-const LIBERDADE = { lat: -23.5555, lng: -46.6355, precisao: 10 };
-
 test('cadastro, código, check-in e admin', { skip: pular }, async () => {
   const c = cliente();
 
@@ -56,7 +54,7 @@ test('cadastro, código, check-in e admin', { skip: pular }, async () => {
   assert.equal(publicos.dados.locais.length, 8);
   for (const campo of ['lat', 'lng', 'token', 'raio_m', 'id']) assert.ok(!(campo in publicos.dados.locais[0]), `${campo} não pode vazar`);
 
-  assert.equal((await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade', token: 'x', ...LIBERDADE } })).status, 401);
+  assert.equal((await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade' } })).status, 401);
 
   const dadosCadastro = { email: 'fa@ex.com', telefone: '11912345678', cidade: 'São Paulo', estado: 'SP', consentimento: true };
   assert.equal((await c('/api/auth/cadastro', { method: 'POST', body: dadosCadastro })).status, 200);
@@ -69,17 +67,18 @@ test('cadastro, código, check-in e admin', { skip: pular }, async () => {
   // e-mail verificado não pode ser recadastrado
   assert.equal((await cliente()('/api/auth/cadastro', { method: 'POST', body: dadosCadastro })).dados.erro, 'existe');
 
-  const { rows } = await pool.query("SELECT slug, token FROM locais WHERE slug IN ('liberdade', 'morumbi') ORDER BY slug");
-  const [lib, mor] = rows;
-
-  let r = await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade', token: mor.token, ...LIBERDADE } });
-  assert.equal(r.dados.erro, 'qr_outro_local');
-  r = await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade', token: lib.token, lat: -23.6, lng: -46.72, precisao: 10 } });
-  assert.equal(r.dados.erro, 'longe');
-  r = await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade', token: lib.token, ...LIBERDADE } });
+  // Check-in só com o botão "Estou aqui": sem QR e sem localização
+  let r = await c('/api/checkin', { method: 'POST', body: { slug: 'nao-existe' } });
+  assert.equal(r.status, 404);
+  r = await c('/api/checkin', { method: 'POST', body: {} });
+  assert.equal(r.status, 400);
+  r = await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade' } });
   assert.equal(r.status, 200);
-  r = await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade', token: lib.token, ...LIBERDADE } });
+  assert.ok(r.dados.coletado_em);
+  r = await c('/api/checkin', { method: 'POST', body: { slug: 'liberdade' } });
+  assert.equal(r.status, 409);
   assert.equal(r.dados.erro, 'ja_carimbado');
+  assert.ok(r.dados.coletado_em);
   assert.ok((await c('/api/locais')).dados.locais.find((l) => l.slug === 'liberdade').coletado_em);
 
   // login em outro aparelho mantém o progresso
@@ -95,7 +94,7 @@ test('cadastro, código, check-in e admin', { skip: pular }, async () => {
   const csv = await c('/api/admin/participantes.csv', adm);
   assert.match(csv.dados, /fa@ex\.com;.*;1\/8;/);
   const locais = await c('/api/admin/locais', adm);
-  assert.equal(locais.dados.locais[0].url_qr, `https://rally.test/l/liberdade?t=${lib.token}`);
+  assert.ok(locais.dados.locais[0].url_qr.startsWith('https://rally.test/l/liberdade'));
   assert.equal((await c(`/api/admin/locais/${locais.dados.locais[0].id}`, { method: 'DELETE', ...adm })).status, 409);
 });
 

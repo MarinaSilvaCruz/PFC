@@ -47,7 +47,6 @@ function criarApp(pool) {
   app.use('/api', carregarSessao(pool), rotasPublicas(pool));
   app.use('/api', (_req, res) => res.status(404).json({ mensagem: 'Rota não encontrada.' }));
 
-  app.use('/vendor/jsQR.js', express.static(require.resolve('jsqr/dist/jsQR.js')));
   app.use(express.static(PUBLIC, { extensions: ['html'] }));
   // Link do QR (/l/<slug>?t=<token>) e qualquer outra rota abrem o app, que lê a URL.
   app.get(['/l/:slug', '/'], (_req, res) => res.sendFile(path.join(PUBLIC, 'index.html')));

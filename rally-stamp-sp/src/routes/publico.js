@@ -1,10 +1,8 @@
-const crypto = require('node:crypto');
 const express = require('express');
 const rateLimit = require('express-rate-limit');
 const auth = require('../auth');
 const email = require('../email');
-const { dentroDoRaio } = require('../geo');
-const { normalizarEmail, validarCadastro, numero, texto } = require('../validacao');
+const { normalizarEmail, validarCadastro, texto } = require('../validacao');
 
 const limite = (windowMin, max) =>
   rateLimit({
@@ -14,12 +12,6 @@ const limite = (windowMin, max) =>
     legacyHeaders: false,
     message: { erro: 'limite', mensagem: 'Muitas tentativas. Espere alguns minutos e tente de novo.' },
   });
-
-const iguais = (a, b) => {
-  const ha = crypto.createHash('sha256').update(String(a)).digest();
-  const hb = crypto.createHash('sha256').update(String(b)).digest();
-  return crypto.timingSafeEqual(ha, hb);
-};
 
 function rotasPublicas(pool) {
   const r = express.Router();
@@ -112,41 +104,25 @@ function rotasPublicas(pool) {
     res.json({ ok: true });
   });
 
+  // Check-in pela palavra da pessoa: tocar em "Estou aqui" no local basta (sem QR e sem GPS).
+  // Vale um carimbo por pessoa por local.
   r.post('/checkin', limiteCheckin, auth.exigirLogin, async (req, res) => {
     const slug = texto(req.body?.slug, 100);
-    const token = texto(req.body?.token, 200);
-    const lat = numero(req.body?.lat, -90, 90);
-    const lng = numero(req.body?.lng, -180, 180);
-    const precisao = numero(req.body?.precisao, 0, 100000);
-    if (!slug || !token || lat === null || lng === null) {
-      return res.status(400).json({ erro: 'validacao', mensagem: 'Não conseguimos ler o QR ou a sua localização. Tente de novo.' });
-    }
+    if (!slug) return res.status(400).json({ erro: 'validacao', mensagem: 'Escolha um local para carimbar.' });
 
-    const { rows } = await pool.query('SELECT id, lat, lng, raio_m, token FROM locais WHERE slug = $1 AND ativo', [slug]);
+    const { rows } = await pool.query('SELECT id FROM locais WHERE slug = $1 AND ativo', [slug]);
     const local = rows[0];
     if (!local) return res.status(404).json({ erro: 'local', mensagem: 'Local não encontrado.' });
 
-    if (!iguais(token, local.token)) {
-      return res.status(400).json({ erro: 'qr_outro_local', mensagem: 'Este QR não é deste ponto.' });
-    }
-
-    const ja = await pool.query('SELECT criado_em FROM carimbos WHERE participante_id = $1 AND local_id = $2', [req.participante.id, local.id]);
-    if (ja.rowCount) {
-      return res.status(409).json({ erro: 'ja_carimbado', mensagem: 'Você já carimbou aqui.', coletado_em: ja.rows[0].criado_em });
-    }
-
-    const tolerancia = Number(process.env.GPS_TOLERANCIA_MAX_M ?? 50);
-    const { ok, distancia } = dentroDoRaio({ lat, lng, precisao }, local, tolerancia);
-    if (!ok) {
-      return res.status(400).json({ erro: 'longe', mensagem: 'Parece que você ainda não está no local.', distancia_m: Math.round(distancia) });
-    }
-
     const ins = await pool.query(
-      `INSERT INTO carimbos (participante_id, local_id, lat, lng, precisao) VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO carimbos (participante_id, local_id) VALUES ($1, $2)
        ON CONFLICT DO NOTHING RETURNING criado_em`,
-      [req.participante.id, local.id, lat, lng, precisao],
+      [req.participante.id, local.id],
     );
-    if (!ins.rowCount) return res.status(409).json({ erro: 'ja_carimbado', mensagem: 'Você já carimbou aqui.' });
+    if (!ins.rowCount) {
+      const ja = await pool.query('SELECT criado_em FROM carimbos WHERE participante_id = $1 AND local_id = $2', [req.participante.id, local.id]);
+      return res.status(409).json({ erro: 'ja_carimbado', mensagem: 'Você já carimbou aqui.', coletado_em: ja.rows[0]?.criado_em });
+    }
     res.json({ ok: true, slug, coletado_em: ins.rows[0].criado_em });
   });
 

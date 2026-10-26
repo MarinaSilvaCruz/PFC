@@ -79,6 +79,8 @@ Ao tocar num cadeado, abre um card/modal com:
 - Descrição curta (opcional)
 - Botão **"Estou aqui"**
 
+> **Mudança de regra (26/10/2026):** o check-in deixou de usar QR code e localização. No local, a pessoa toca no botão verde **"Estou aqui"** e o carimbo é aceito na hora (vale a palavra de quem participa). Continua valendo um carimbo por pessoa por local. As seções 4.4 e 4.5 abaixo descrevem o desenho original, mantido como histórico.
+
 ### 4.4 Check-in no local
 1. No local, a pessoa toca no cadeado e depois em **"Estou aqui"**.
 2. O site pede a **geolocalização** do navegador:

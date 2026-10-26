@@ -76,21 +76,18 @@ async function carregarLocais() {
       <span class="chip ${l.ativo ? 'chip-neutro' : 'chip-amarelo'} caption">#${l.ordem} · ${l.ativo ? 'ativo' : 'inativo'} · ${l.total_carimbos} carimbo(s)</span>
       <h2 class="heading-md">${esc(l.nome)}</h2>
       <p class="body-md texto-2">${esc(l.endereco)}</p>
-      <p class="caption">lat ${l.lat}, lng ${l.lng} · raio ${l.raio_m} m</p>
-      <p class="caption"><code>${esc(l.url_qr)}</code></p>
+      <p class="caption">Link do local: <code>${esc(`${location.origin}/l/${l.slug}`)}</code></p>
       <div class="acoes-linha">
         <button class="btn btn-contorno" data-editar="${l.id}">Editar</button>
-        <button class="btn btn-secundario" data-qr="${l.id}">Baixar QR</button>
-        <button class="btn btn-contorno" data-token="${l.id}">Trocar token</button>
         ${l.total_carimbos ? '' : `<button class="btn btn-contorno" data-excluir="${l.id}">Excluir</button>`}
       </div>
     </article>`).join('');
 }
 
 const CAMPOS = [
-  ['nome', 'Nome', 'text', 'largo'], ['slug', 'Slug (usado na URL do QR)', 'text'], ['ordem', 'Ordem na trilha', 'number'],
-  ['bairro', 'Bairro', 'text'], ['raio_m', 'Raio (m)', 'number'], ['endereco', 'Endereço', 'text', 'largo'],
-  ['lat', 'Latitude', 'text'], ['lng', 'Longitude', 'text'], ['foto_qr_url', 'URL da foto de onde o QR está', 'url', 'largo'],
+  ['nome', 'Nome', 'text', 'largo'], ['slug', 'Slug (usado no link do local)', 'text'], ['ordem', 'Ordem na trilha', 'number'],
+  ['bairro', 'Bairro', 'text'], ['endereco', 'Endereço', 'text', 'largo'],
+  ['lat', 'Latitude', 'text'], ['lng', 'Longitude', 'text'], ['foto_qr_url', 'URL de uma foto do local (opcional)', 'url', 'largo'],
   ['descricao', 'Descrição', 'text', 'largo'], ['horario', 'Horário / datas (opcional)', 'text', 'largo'],
 ];
 
@@ -152,15 +149,9 @@ function iniciar() {
   $('#lista-locais').onclick = async (e) => {
     const b = e.target.closest('button');
     if (!b) return;
-    const id = Number(b.dataset.editar || b.dataset.qr || b.dataset.token || b.dataset.excluir);
+    const id = Number(b.dataset.editar || b.dataset.excluir);
     const l = locais.find((x) => x.id === id);
     if (b.dataset.editar) editarLocal(l);
-    if (b.dataset.qr) baixar(`/locais/${id}/qr.png`, `qr-${l.slug}.png`);
-    if (b.dataset.token && confirm(`Trocar o token de "${l.nome}"? QRs já impressos deste local param de funcionar.`)) {
-      await adm(`/locais/${id}/novo-token`, { method: 'POST' });
-      toast('Token trocado. Baixe e imprima o QR novo.');
-      carregarLocais();
-    }
     if (b.dataset.excluir && confirm(`Excluir "${l.nome}"?`)) {
       const { ok, dados } = await json(await adm(`/locais/${id}`, { method: 'DELETE' }));
       toast(ok ? 'Local excluído.' : dados.mensagem);

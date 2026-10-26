@@ -6,10 +6,6 @@ import { iniciarCheckin, configurarCheckin } from './checkin.js';
 import { mostrarConclusao } from './conclusao.js';
 
 const estado = { participante: null, locais: [], aposLogin: null };
-const CHAVE_PENDENTE = 'rally:checkin-pendente';
-
-/** Usada enquanto o local não tem a foto real de onde o QR fica. */
-const FOTO_PROVISORIA = '/img/foto-placeholder.svg';
 
 const giro = (i) => `${((i * 37) % 17) - 8}deg`;
 const ehFan = (l) => l.tipo === 'fan_project';
@@ -160,11 +156,10 @@ function abrirLocal(slug) {
   const i = estado.locais.indexOf(l);
   const q = encodeURIComponent(l.endereco || l.nome);
   const foto = l.foto_qr_url
-    ? `<img class="foto-qr" src="${esc(l.foto_qr_url)}" alt="Onde o QR fica em ${esc(l.nome)}" loading="lazy">`
-    : `<div class="foto-provisoria">
-        <img class="foto-qr" src="${FOTO_PROVISORIA}" alt="Ilustração provisória. A foto de onde o QR fica em ${esc(l.nome)} chega em breve.">
-        <span class="chip chip-amarelo caption">foto ilustrativa</span>
-      </div>`;
+    ? `<figure class="polaroid" style="margin:var(--space-8) var(--space-2) 0">
+        <img class="foto-qr" src="${esc(l.foto_qr_url)}" alt="Foto de ${esc(l.nome)}" loading="lazy">
+      </figure>`
+    : '';
   const el = abrirFolha(`
     <div class="folha-topo">
       <div class="chips">
@@ -187,17 +182,14 @@ function abrirLocal(slug) {
         <a href="https://maps.apple.com/?q=${q}" target="_blank" rel="noopener">Apple Maps</a>
       </div>
     </div>
-    <figure class="polaroid" style="margin:var(--space-8) var(--space-2) 0">
-      ${foto}
-      <figcaption class="script-note">o QR fica aqui</figcaption>
-    </figure>
+    ${foto}
     ${l.coletado_em ? '' : `
       <div class="acoes">
-        <button class="btn btn-primario btn-bloco" data-acao="estou-aqui">Estou aqui</button>
-        <p class="caption texto-2 centro">Você precisa estar no local, com a localização ligada.</p>
+        <button class="btn btn-secundario btn-bloco" data-acao="estou-aqui">Estou aqui</button>
+        <p class="caption texto-2 centro">Chegou ao local? Toque no botão e o carimbo é seu.</p>
       </div>`}`);
   const btn = $('[data-acao="estou-aqui"]', el);
-  if (btn) btn.onclick = () => iniciarCheckin(l);
+  if (btn) btn.onclick = () => iniciarCheckin(l, btn);
 }
 
 /* ---------- Dados ---------- */
@@ -221,28 +213,12 @@ function carimbar(slug, coletadoEm) {
   else toast('Carimbado! Bora pra próxima parada?');
 }
 
-/* ---------- Link do QR (/l/<slug>?t=<token>) ---------- */
-function lerLinkDoQr() {
+/* ---------- Link direto de um local (/l/<slug>) ---------- */
+function lerLinkDoLocal() {
   const m = location.pathname.match(/^\/l\/([^/]+)\/?$/);
-  if (!m) return;
-  const token = new URLSearchParams(location.search).get('t');
-  sessionStorage.setItem(CHAVE_PENDENTE, JSON.stringify({ slug: decodeURIComponent(m[1]), token }));
+  if (!m) return null;
   history.replaceState(null, '', '/');
-}
-
-function retomarCheckinPendente() {
-  let pendente;
-  try { pendente = JSON.parse(sessionStorage.getItem(CHAVE_PENDENTE)); } catch { /* vazio */ }
-  if (!pendente) return;
-  const l = estado.locais.find((x) => x.slug === pendente.slug);
-  if (!l) return sessionStorage.removeItem(CHAVE_PENDENTE);
-  if (!estado.participante) {
-    estado.aposLogin = retomarCheckinPendente;
-    return pedirLogin(`Entre para carimbar ${l.nome}. Depois do login a gente continua daqui.`);
-  }
-  sessionStorage.removeItem(CHAVE_PENDENTE);
-  if (l.coletado_em) return abrirLocal(l.slug);
-  iniciarCheckin(l, { token: pendente.token || undefined });
+  return decodeURIComponent(m[1]);
 }
 
 /* ---------- Início ---------- */
@@ -285,9 +261,9 @@ async function iniciar() {
     },
   });
 
-  lerLinkDoQr();
+  const slugDoLink = lerLinkDoLocal();
   await carregar();
-  retomarCheckinPendente();
+  if (slugDoLink) abrirLocal(slugDoLink);
 }
 
 iniciar();

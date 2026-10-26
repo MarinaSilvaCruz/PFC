@@ -29,25 +29,27 @@ Sem `RESEND_API_KEY`, o código de login aparece no console do servidor.
 
 ## Locais
 
-`data/locais.json` tem os locais reais confirmados até agora. As coordenadas marcadas com `"_obs": "coordenadas aproximadas: confirmar"` ainda precisam ser conferidas (no Google Maps, segure o dedo sobre o local e copie os números). Para adicionar ou mudar locais, há dois caminhos:
+`data/locais.json` tem os locais do rally. Para adicionar ou mudar locais, há dois caminhos:
 
-1. Editar `data/locais.json` e rodar `npm run seed`. Os locais casam pelo `slug`; o token do QR de um local que já existe é mantido (QRs impressos continuam valendo).
-2. Usar o painel `/admin` → **Locais** (criar, editar, desativar, trocar token, baixar o QR em PNG).
+1. Editar `data/locais.json`: locais novos entram sozinhos no próximo deploy; mudanças nos existentes entram com `SINCRONIZAR_LOCAIS=true` (casando pelo `slug`).
+2. Usar o painel `/admin` → **Locais** (criar, editar, desativar).
 
-Campos: `slug`, `nome`, `bairro`, `endereco`, `descricao`, `foto_qr_url`, `lat`, `lng`, `raio_m` (padrão 150), `ordem`, `ativo`.
-`lat`, `lng`, `raio_m` e o token **nunca** saem na API pública.
+Campos: `slug`, `nome`, `bairro`, `endereco`, `descricao`, `horario`, `tipo` (`loja` ou `fan_project`), `foto_qr_url` (foto opcional do local), `ordem`, `ativo`.
+`lat`, `lng`, `raio_m` e `token` continuam no banco, mas hoje não são usados: o carimbo não depende de QR nem de localização.
 
-O QR de cada local aponta para `PUBLIC_URL/l/<slug>?t=<token>`: lido pelo leitor do site, valida na hora; lido pela câmera normal, abre o site já no check-in daquele ponto.
+O link `PUBLIC_URL/l/<slug>` abre o site direto no detalhe daquele local.
 
 ## Admin
 
-`/admin`, com o `ADMIN_TOKEN` do `.env`. Mostra os participantes com o progresso de cada um, exporta CSV (separado por `;`, abre direto no Excel em português) e gerencia os locais e os QR codes.
+`/admin`, com o `ADMIN_TOKEN` do `.env`. Mostra os participantes com o progresso de cada um, exporta CSV (separado por `;`, abre direto no Excel em português) e gerencia os locais.
 
 ## Regras do check-in (servidor)
 
-1. O token lido tem que ser o do local escolhido (`Este QR não é deste ponto`).
-2. Um carimbo por pessoa por local (`Você já carimbou aqui`), garantido por chave primária.
-3. Distância de Haversine até o local ≤ `raio_m` + folga da precisão do GPS, limitada por `GPS_TOLERANCIA_MAX_M` (padrão 50 m) (`Parece que você ainda não está no local`).
+Desde 26/10/2026 o check-in é pela palavra da pessoa: no local, ela toca no botão verde **Estou aqui** e o carimbo é aceito. Não há leitura de QR nem checagem de localização.
+
+1. Precisa estar logada.
+2. O local precisa existir e estar ativo.
+3. Um carimbo por pessoa por local (`Você já carimbou aqui`), garantido por chave primária.
 
 Login, código e check-in têm rate limit por IP. A sessão é um cookie httpOnly de 60 dias; o código de login tem 6 dígitos, vale 10 minutos e aceita 5 tentativas.
 

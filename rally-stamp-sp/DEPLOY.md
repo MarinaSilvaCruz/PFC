@@ -62,7 +62,7 @@ Em **Settings → Networking → Generate Domain**. O Railway cria um endereço 
 
 ## Fase 3: domínio definitivo (por último)
 
-Faça esta fase **antes de imprimir os QR codes**, porque o endereço do site vai dentro deles.
+Faça esta fase antes de divulgar o link do site.
 
 1. **Domínio do site:** no Railway, **Settings → Networking → Custom Domain**, digite o domínio (por exemplo `rally.seudominio.com.br`). O Railway mostra um registro **CNAME**: crie esse registro no painel de DNS de onde o domínio está registrado. O HTTPS é emitido sozinho.
 2. **Domínio do e-mail:** no Resend, **Domains → Add Domain**, use o mesmo domínio e crie no DNS os registros que ele mostrar (SPF, DKIM e, se pedir, MX). Espere aparecer "Verified".
@@ -70,20 +70,17 @@ Faça esta fase **antes de imprimir os QR codes**, porque o endereço do site va
    - `PUBLIC_URL` = `https://rally.seudominio.com.br`
    - `EMAIL_FROM` = `Unofficial Stamp Rally <nao-responda@seudominio.com.br>`
 4. Teste o login com um e-mail que não seja o seu.
-5. Só então, no `/admin` → **Locais**, baixe e imprima os QR codes.
 
 ---
 
 ## Checklist antes de divulgar
 
-- [ ] Coordenadas exatas de todos os locais (hoje marcadas com `"_obs": "coordenadas aproximadas: confirmar"` em `data/locais.json`)
-- [ ] Foto de onde cada QR fica (`foto_qr_url`)
+- [ ] Endereços dos locais conferidos
 - [ ] Texto de privacidade revisado
-- [ ] Teste em campo num iPhone (Safari) e num Android (Chrome): localização, câmera e carimbo
-- [ ] QR codes impressos com o domínio definitivo
+- [ ] Teste num iPhone (Safari) e num Android (Chrome): cadastro, código por e-mail e carimbo pelo botão "Estou aqui"
 
 ## Depois de no ar
 
-- **Mudar locais:** com `SINCRONIZAR_LOCAIS=true`, cada deploy aplica o `data/locais.json` (o token dos QRs já impressos é mantido; locais que saíram do arquivo ficam desativados). Se preferir editar pelo `/admin`, mude a variável para `false`, senão o próximo deploy desfaz as edições.
+- **Mudar locais:** com `SINCRONIZAR_LOCAIS=true`, cada deploy aplica o `data/locais.json` (locais que saíram do arquivo ficam desativados). Se preferir editar pelo `/admin`, mude a variável para `false`, senão o próximo deploy desfaz as edições.
 - **Leads:** `/admin` → **Participantes** → **Exportar CSV**.
 - **Backup:** o Postgres do Railway tem backups na aba do banco; vale ativar antes dos shows.
