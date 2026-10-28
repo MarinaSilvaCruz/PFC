@@ -50,7 +50,7 @@
   {
     "slug": "bts-wall-beco-do-batman",
     "ordem": 4,
-    "tipo": "loja",
+    "tipo": "fan_project",
     "nome": "BTS Wall no Beco do Batman",
     "bairro": "Vila Madalena",
     "endereco": "Ziv Gallery - Rua Gonçalo Afonso, 119 - Vila Madalena (Beco do Batman), São Paulo - SP",
@@ -60,7 +60,8 @@
     "lat": -23.5562,
     "lng": -46.6876,
     "raio_m": 150,
-    "_obs": "coordenadas aproximadas: confirmar"
+    "_obs": "coordenadas aproximadas: confirmar",
+    "forcar": true
   },
   {
     "slug": "emporio-azuki",
