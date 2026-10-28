@@ -31,7 +31,7 @@ Sem `RESEND_API_KEY`, o código de login aparece no console do servidor.
 
 `data/locais.json` tem os locais do rally. Para adicionar ou mudar locais, há dois caminhos:
 
-1. Editar `data/locais.json`: locais novos entram sozinhos no próximo deploy; mudanças nos existentes entram com `SINCRONIZAR_LOCAIS=true` (casando pelo `slug`).
+1. Editar `data/locais.json`: locais novos entram sozinhos no próximo deploy; mudanças nos existentes entram com `SINCRONIZAR_LOCAIS=true` (casando pelo `slug`). Com a variável desligada, um local existente marcado com `"forcar": true` também é atualizado a cada deploy (para tirar um local da cartela, use `"ativo": false` junto).
 2. Usar o painel `/admin` → **Locais** (criar, editar, desativar).
 
 Campos: `slug`, `nome`, `bairro`, `endereco`, `descricao`, `horario`, `tipo` (`loja` ou `fan_project`), `foto_qr_url` (foto opcional do local), `ordem`, `ativo`.

@@ -12,7 +12,8 @@
     "lat": -23.5333,
     "lng": -46.6478,
     "raio_m": 150,
-    "_obs": "coordenadas aproximadas: confirmar"
+    "_obs": "coordenadas aproximadas: confirmar",
+    "forcar": true
   },
   {
     "slug": "hope-in-motion",
@@ -27,7 +28,8 @@
     "lat": -23.5993,
     "lng": -46.7213,
     "raio_m": 150,
-    "_obs": "coordenadas aproximadas: confirmar"
+    "_obs": "coordenadas aproximadas: confirmar",
+    "forcar": true
   },
   {
     "slug": "love-yourself-light-moment",
@@ -42,7 +44,8 @@
     "lat": -23.5458,
     "lng": -46.6386,
     "raio_m": 150,
-    "_obs": "coordenadas aproximadas: confirmar"
+    "_obs": "coordenadas aproximadas: confirmar",
+    "forcar": true
   },
   {
     "slug": "bts-wall-beco-do-batman",
@@ -133,5 +136,22 @@
     "lng": -46.6346,
     "raio_m": 150,
     "_obs": "coordenadas aproximadas: confirmar"
+  },
+  {
+    "slug": "celebracao-ao-jimin",
+    "ordem": 99,
+    "tipo": "fan_project",
+    "nome": "Celebração ao Jimin",
+    "bairro": "Pinheiros",
+    "endereco": "Hyo Jeong Cafeteria - R. Lisboa, 904 - Pinheiros, São Paulo - SP",
+    "descricao": "Celebração ao Jimin na Hyo Jeong Cafeteria.",
+    "horario": "Das 11h às 18h",
+    "foto_qr_url": "",
+    "lat": -23.5597,
+    "lng": -46.6808,
+    "raio_m": 150,
+    "ativo": false,
+    "forcar": true,
+    "_obs": "removido da cartela em 28/10: fica inativo para preservar os carimbos já dados"
   }
 ]
